@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer & Sales Intelligence | AgroBest</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #334155;
+        }
+        .header h1 { font-size: 24px; font-weight: 600; }
+        .header .date { color: #94a3b8; font-size: 14px; }
+        .header .logo {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .grid { display: grid; gap: 20px; }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-sidebar { grid-template-columns: 1fr 380px; }
+
+        .card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #334155;
+        }
+        .card-title { font-size: 14px; color: #94a3b8; font-weight: 500; margin-bottom: 16px; }
+        .card-value { font-size: 28px; font-weight: 700; }
+        .card-change { font-size: 12px; margin-top: 4px; }
+        .positive { color: #22c55e; }
+        .negative { color: #ef4444; }
+        .neutral { color: #f59e0b; }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #334155;
+        }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: #94a3b8; font-size: 13px; }
+        .stat-value { font-weight: 600; font-size: 15px; }
+
+        .chart-container { height: 280px; }
+        .chart-container-lg { height: 320px; }
+
+        .customer-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #334155;
+        }
+        .customer-row:last-child { border-bottom: none; }
+        .customer-rank {
+            width: 24px;
+            height: 24px;
+            background: #334155;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 12px;
+        }
+        .customer-rank.gold { background: linear-gradient(135deg, #fbbf24, #d97706); }
+        .customer-rank.silver { background: linear-gradient(135deg, #9ca3af, #6b7280); }
+        .customer-rank.bronze { background: linear-gradient(135deg, #f97316, #c2410c); }
+        .customer-info { flex: 1; }
+        .customer-name { font-size: 13px; font-weight: 500; }
+        .customer-meta { font-size: 11px; color: #64748b; }
+        .customer-revenue { text-align: right; }
+        .customer-amount { font-weight: 600; font-size: 14px; }
+        .customer-share { font-size: 11px; color: #64748b; }
+
+        .ai-panel {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #334155;
+        }
+        .ai-badge {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .ai-title { font-size: 16px; font-weight: 600; }
+        .ai-insight {
+            padding: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+            border-left: 3px solid #3b82f6;
+        }
+        .ai-insight.warning { border-left-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+        .ai-insight.success { border-left-color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .ai-insight.alert { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .insight-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .heatmap {
+            display: grid;
+            grid-template-columns: 100px repeat(12, 1fr);
+            gap: 2px;
+            font-size: 10px;
+        }
+        .heatmap-header { color: #64748b; padding: 4px; text-align: center; }
+        .heatmap-label { color: #94a3b8; padding: 4px; font-size: 11px; }
+        .heatmap-cell {
+            padding: 8px 4px;
+            text-align: center;
+            border-radius: 2px;
+            font-size: 9px;
+        }
+        .heat-0 { background: #1e293b; color: #475569; }
+        .heat-1 { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .heat-2 { background: rgba(34, 197, 94, 0.4); color: #22c55e; }
+        .heat-3 { background: rgba(34, 197, 94, 0.6); color: #fff; }
+        .heat-4 { background: rgba(34, 197, 94, 0.8); color: #fff; }
+        .heat-5 { background: #22c55e; color: #fff; font-weight: 600; }
+
+        .risk-meter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .risk-bar {
+            flex: 1;
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .risk-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        .risk-label { font-size: 12px; color: #94a3b8; }
+
+        .footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-sidebar { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>Customer & Sales Intelligence</h1>
+            <div class="date">FY 2022/23 Analysis | Historical Patterns</div>
+        </div>
+        <div class="logo">AGROBEST</div>
+    </div>
+
+    <!-- KPI Row -->
+    <div class="grid grid-3" style="margin-bottom: 20px;">
+        <div class="card">
+            <div class="card-title">Total Customers (Active)</div>
+            <div class="card-value">47</div>
+            <div class="stat-row">
+                <span class="stat-label">Avg Revenue/Customer</span>
+                <span class="stat-value">$108K</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Top 5 Share</span>
+                <span class="stat-value negative">47%</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Single-Purchase Customers</span>
+                <span class="stat-value neutral">12</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Revenue Concentration Risk</div>
+            <div style="margin-top: 8px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 12px; color: #94a3b8;">Top 1 Customer</span>
+                    <span style="font-size: 12px; font-weight: 600;">18%</span>
+                </div>
+                <div class="risk-meter">
+                    <div class="risk-bar"><div class="risk-fill" style="width: 18%; background: #22c55e;"></div></div>
+                </div>
+            </div>
+            <div style="margin-top: 12px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 12px; color: #94a3b8;">Top 5 Customers</span>
+                    <span style="font-size: 12px; font-weight: 600;">47%</span>
+                </div>
+                <div class="risk-meter">
+                    <div class="risk-bar"><div class="risk-fill" style="width: 47%; background: #f59e0b;"></div></div>
+                </div>
+            </div>
+            <div style="margin-top: 12px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-size: 12px; color: #94a3b8;">Top 10 Customers</span>
+                    <span style="font-size: 12px; font-weight: 600;">68%</span>
+                </div>
+                <div class="risk-meter">
+                    <div class="risk-bar"><div class="risk-fill" style="width: 68%; background: #ef4444;"></div></div>
+                </div>
+            </div>
+            <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #334155; font-size: 11px; color: #64748b;">
+                Industry benchmark: Top 5 should be &lt;30%
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Seasonality Index</div>
+            <div class="card-value">2.9x</div>
+            <div class="card-change neutral">Peak vs trough variance</div>
+            <div class="stat-row">
+                <span class="stat-label">Peak Month</span>
+                <span class="stat-value positive">January ($947K)</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Trough Month</span>
+                <span class="stat-value negative">May ($188K)</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Avg Monthly</span>
+                <span class="stat-value">$423K</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid grid-sidebar" style="margin-bottom: 20px;">
+        <div class="card">
+            <div class="card-title">Top 10 Customers by Revenue</div>
+
+            <div class="customer-row">
+                <div class="customer-rank gold">1</div>
+                <div class="customer-info">
+                    <div class="customer-name">Advanced Nutrients Pty Ltd</div>
+                    <div class="customer-meta">12 months active | Bulk orders</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$926,160</div>
+                    <div class="customer-share">18.2%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank silver">2</div>
+                <div class="customer-info">
+                    <div class="customer-name">Oasis Pacific Pty Ltd</div>
+                    <div class="customer-meta">12 months active | Consistent</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$578,438</div>
+                    <div class="customer-share">11.4%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank bronze">3</div>
+                <div class="customer-info">
+                    <div class="customer-name">Living Turf - Marrickville</div>
+                    <div class="customer-meta">12 months active | Growing</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$375,209</div>
+                    <div class="customer-share">7.4%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank">4</div>
+                <div class="customer-info">
+                    <div class="customer-name">Nutrien - Clermont</div>
+                    <div class="customer-meta">2 months active | Seasonal</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$305,280</div>
+                    <div class="customer-share">6.0%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank">5</div>
+                <div class="customer-info">
+                    <div class="customer-name">Emaho Trees</div>
+                    <div class="customer-meta">6 months active | Large orders</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$261,278</div>
+                    <div class="customer-share">5.1%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank">6</div>
+                <div class="customer-info">
+                    <div class="customer-name">ACE Ohlsson - Syd Markets</div>
+                    <div class="customer-meta">11 months active | Retail chain</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$258,076</div>
+                    <div class="customer-share">5.1%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank">7</div>
+                <div class="customer-info">
+                    <div class="customer-name">Turfcare - Dandenong</div>
+                    <div class="customer-meta">10 months active | VIC focus</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$230,785</div>
+                    <div class="customer-share">4.5%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank">8</div>
+                <div class="customer-info">
+                    <div class="customer-name">ECO-Global Crop Solutions</div>
+                    <div class="customer-meta">3 months active | Quarterly</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$204,177</div>
+                    <div class="customer-share">4.0%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank">9</div>
+                <div class="customer-info">
+                    <div class="customer-name">Living Turf - Wacol</div>
+                    <div class="customer-meta">12 months active | QLD</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$188,817</div>
+                    <div class="customer-share">3.7%</div>
+                </div>
+            </div>
+
+            <div class="customer-row">
+                <div class="customer-rank">10</div>
+                <div class="customer-info">
+                    <div class="customer-name">Platinum AG Services</div>
+                    <div class="customer-meta">2 months active | SA region</div>
+                </div>
+                <div class="customer-revenue">
+                    <div class="customer-amount">$177,160</div>
+                    <div class="customer-share">3.5%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-panel">
+            <div class="ai-header">
+                <div class="ai-badge">AI INSIGHTS</div>
+                <div class="ai-title">Customer Intelligence</div>
+            </div>
+
+            <div class="ai-insight alert">
+                <div class="insight-label">Concentration Risk</div>
+                <strong>Advanced Nutrients</strong> represents 18% of revenue with a single $560K order in January. Loss of this account would require 5+ new mid-tier customers to replace.
+            </div>
+
+            <div class="ai-insight warning">
+                <div class="insight-label">Churn Signal</div>
+                <strong>3 customers</strong> showing declining trajectory: Greenshed NZ (-42% YoY), Wood AG (-38%), Lindsay Rural (-67%). Recommend proactive outreach.
+            </div>
+
+            <div class="ai-insight success">
+                <div class="insight-label">Growth Opportunity</div>
+                <strong>Living Turf network</strong> (4 locations) = $725K combined. Cross-sell opportunity: Only Marrickville buys full product range. Potential +$180K if replicated.
+            </div>
+
+            <div class="ai-insight">
+                <div class="insight-label">Seasonality Pattern</div>
+                <strong>Dec-Feb</strong> = 47% of annual revenue. Collections strategy critical. Consider early-pay discounts in peak months to smooth cash flow.
+            </div>
+
+            <div class="ai-insight warning">
+                <div class="insight-label">At-Risk Accounts</div>
+                <strong>12 single-purchase customers</strong> from FY23 haven't reordered. Win-back campaign could recover $150-200K in dormant revenue.
+            </div>
+
+            <div class="ai-insight success">
+                <div class="insight-label">Geographic Expansion</div>
+                <strong>SA/WA underweight</strong> at 8% of revenue vs 18% of agricultural land. Platinum AG and Elders relationships could unlock $300K+ regional growth.
+            </div>
+        </div>
+    </div>
+
+    <!-- Seasonality Heatmap -->
+    <div class="card" style="margin-bottom: 20px;">
+        <div class="card-title">Monthly Revenue Heatmap by Top Customers ($K)</div>
+        <div class="heatmap" style="margin-top: 16px;">
+            <div class="heatmap-header"></div>
+            <div class="heatmap-header">Jul</div>
+            <div class="heatmap-header">Aug</div>
+            <div class="heatmap-header">Sep</div>
+            <div class="heatmap-header">Oct</div>
+            <div class="heatmap-header">Nov</div>
+            <div class="heatmap-header">Dec</div>
+            <div class="heatmap-header">Jan</div>
+            <div class="heatmap-header">Feb</div>
+            <div class="heatmap-header">Mar</div>
+            <div class="heatmap-header">Apr</div>
+            <div class="heatmap-header">May</div>
+            <div class="heatmap-header">Jun</div>
+
+            <div class="heatmap-label">Adv. Nutrients</div>
+            <div class="heatmap-cell heat-2">45</div>
+            <div class="heatmap-cell heat-2">45</div>
+            <div class="heatmap-cell heat-2">50</div>
+            <div class="heatmap-cell heat-3">96</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-5">560</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-2">43</div>
+            <div class="heatmap-cell heat-2">44</div>
+            <div class="heatmap-cell heat-2">44</div>
+
+            <div class="heatmap-label">Oasis Pacific</div>
+            <div class="heatmap-cell heat-1">6</div>
+            <div class="heatmap-cell heat-2">46</div>
+            <div class="heatmap-cell heat-4">130</div>
+            <div class="heatmap-cell heat-2">52</div>
+            <div class="heatmap-cell heat-1">11</div>
+            <div class="heatmap-cell heat-3">75</div>
+            <div class="heatmap-cell heat-3">93</div>
+            <div class="heatmap-cell heat-1">27</div>
+            <div class="heatmap-cell heat-2">48</div>
+            <div class="heatmap-cell heat-1">34</div>
+            <div class="heatmap-cell heat-2">41</div>
+            <div class="heatmap-cell heat-1">13</div>
+
+            <div class="heatmap-label">Living Turf M</div>
+            <div class="heatmap-cell heat-1">15</div>
+            <div class="heatmap-cell heat-1">15</div>
+            <div class="heatmap-cell heat-1">23</div>
+            <div class="heatmap-cell heat-1">26</div>
+            <div class="heatmap-cell heat-1">24</div>
+            <div class="heatmap-cell heat-1">23</div>
+            <div class="heatmap-cell heat-2">41</div>
+            <div class="heatmap-cell heat-4">128</div>
+            <div class="heatmap-cell heat-1">24</div>
+            <div class="heatmap-cell heat-1">16</div>
+            <div class="heatmap-cell heat-1">11</div>
+            <div class="heatmap-cell heat-1">29</div>
+
+            <div class="heatmap-label">Nutrien Cler.</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-5">232</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-3">73</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+
+            <div class="heatmap-label">Emaho Trees</div>
+            <div class="heatmap-cell heat-0">0</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-1">2</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-5">200</div>
+            <div class="heatmap-cell heat-1">18</div>
+            <div class="heatmap-cell heat-0">-</div>
+            <div class="heatmap-cell heat-1">10</div>
+            <div class="heatmap-cell heat-1">31</div>
+        </div>
+        <div style="margin-top: 16px; display: flex; gap: 16px; font-size: 11px; color: #64748b;">
+            <span><span style="display: inline-block; width: 12px; height: 12px; background: #1e293b; border-radius: 2px; margin-right: 4px;"></span>No sales</span>
+            <span><span style="display: inline-block; width: 12px; height: 12px; background: rgba(34, 197, 94, 0.2); border-radius: 2px; margin-right: 4px;"></span>&lt;$50K</span>
+            <span><span style="display: inline-block; width: 12px; height: 12px; background: rgba(34, 197, 94, 0.4); border-radius: 2px; margin-right: 4px;"></span>$50-100K</span>
+            <span><span style="display: inline-block; width: 12px; height: 12px; background: rgba(34, 197, 94, 0.6); border-radius: 2px; margin-right: 4px;"></span>$100-150K</span>
+            <span><span style="display: inline-block; width: 12px; height: 12px; background: #22c55e; border-radius: 2px; margin-right: 4px;"></span>$150K+</span>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid grid-2">
+        <div class="card">
+            <div class="card-title">Monthly Revenue Distribution</div>
+            <div class="chart-container">
+                <canvas id="monthlyChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Customer Segment Distribution</div>
+            <div class="chart-container">
+                <canvas id="segmentChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>Generated by RealShift Customer Intelligence</div>
+        <div>AI Insights powered by GPT-4 | Updated daily</div>
+    </div>
+
+    <script>
+        // Monthly Revenue Chart
+        const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+        new Chart(monthlyCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'FY22/23 Revenue',
+                    data: [300, 425, 494, 434, 261, 750, 947, 564, 255, 271, 188, 279],
+                    borderColor: '#22c55e',
+                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#22c55e'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    y: {
+                        grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                        ticks: {
+                            color: '#94a3b8',
+                            callback: value => '$' + value + 'K'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Customer Segment Chart
+        const segmentCtx = document.getElementById('segmentChart').getContext('2d');
+        new Chart(segmentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Enterprise ($200K+)',
+                    'Mid-Market ($50-200K)',
+                    'SMB ($10-50K)',
+                    'Long Tail (<$10K)'
+                ],
+                datasets: [{
+                    data: [52, 28, 14, 6],
+                    backgroundColor: [
+                        '#22c55e',
+                        '#3b82f6',
+                        '#f59e0b',
+                        '#64748b'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#94a3b8', padding: 16, usePointStyle: true }
+                    }
+                },
+                cutout: '55%'
+            }
+        });
+    </script>
+</body>
+</html>

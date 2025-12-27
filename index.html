@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroBest Finance Dashboard Demo | RealShift</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .container {
+            max-width: 1100px;
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .logo {
+            display: inline-block;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            color: #94a3b8;
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 32px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .card:hover::before { opacity: 1; }
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .card-icon.finance { background: rgba(34, 197, 94, 0.2); }
+        .card-icon.customers { background: rgba(59, 130, 246, 0.2); }
+        .card-icon.sales { background: rgba(249, 115, 22, 0.2); }
+        .card h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .card p {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            background: #334155;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+        .tag.ai {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+            color: #a5b4fc;
+        }
+        .cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+            color: #3b82f6;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .cta svg {
+            transition: transform 0.3s ease;
+        }
+        .card:hover .cta svg {
+            transform: translateX(4px);
+        }
+        .footer {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid #334155;
+        }
+        .footer-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: #3b82f6;
+            margin-bottom: 8px;
+        }
+        .footer p {
+            color: #64748b;
+            font-size: 13px;
+        }
+        .footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 900px) {
+            .cards { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .cards { grid-template-columns: 1fr; }
+            .header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">REALSHIFT</div>
+            <div class="badge">DEMO PREVIEW</div>
+            <h1>Finance Dashboard Suite</h1>
+            <p>Interactive dashboards with AI-powered insights. Built for AgroBest using real financial data patterns.</p>
+        </div>
+
+        <div class="cards">
+            <a href="Dashboard-1-Executive-Finance.html" class="card">
+                <div class="card-icon finance">$</div>
+                <h2>Finance</h2>
+                <p>P&L overview, budget vs actual tracking, cash position monitoring, and expense analysis.</p>
+                <div class="card-features">
+                    <span class="tag">KPI Cards</span>
+                    <span class="tag">Budget Tracking</span>
+                    <span class="tag">P&L Table</span>
+                    <span class="tag ai">AI Insights</span>
+                </div>
+                <div class="cta">
+                    View Dashboard
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+
+            <a href="Dashboard-2-Sales-Actions.html" class="card">
+                <div class="card-icon sales">🔭</div>
+                <h2>Foresight</h2>
+                <p>Market intelligence, commodity tracking, priority actions, territory opportunities, and crop calendar insights.</p>
+                <div class="card-features">
+                    <span class="tag">Market Intel</span>
+                    <span class="tag">Priority Actions</span>
+                    <span class="tag">Crop Calendar</span>
+                    <span class="tag ai">AI Foresight</span>
+                </div>
+                <div class="cta">
+                    View Dashboard
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <div class="footer-logo">RealShift</div>
+            <p>Automation &amp; Analytics for Australian Agriculture</p>
+            <p style="margin-top: 8px;"><a href="mailto:barcley@realshift.com.au">barcley@realshift.com.au</a></p>
+        </div>
+    </div>
+</body>
+</html>

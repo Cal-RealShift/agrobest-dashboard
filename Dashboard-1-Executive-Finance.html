@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance | AgroBest</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 24px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #334155;
+        }
+        .header h1 { font-size: 24px; font-weight: 600; }
+        .header .subtitle { color: #64748b; font-size: 12px; }
+        .header .logo {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .grid { display: grid; gap: 20px; }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: 2fr 1fr; }
+
+        .card {
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #334155;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .card-title { font-size: 14px; color: #94a3b8; font-weight: 500; }
+        .card-value { font-size: 28px; font-weight: 700; margin-top: 8px; }
+        .card-change { font-size: 12px; margin-top: 4px; }
+        .positive { color: #22c55e; }
+        .negative { color: #ef4444; }
+        .neutral { color: #f59e0b; }
+
+        .kpi-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .kpi-revenue { background: rgba(34, 197, 94, 0.2); }
+        .kpi-profit { background: rgba(59, 130, 246, 0.2); }
+        .kpi-margin { background: rgba(168, 85, 247, 0.2); }
+        .kpi-cash { background: rgba(245, 158, 11, 0.2); }
+
+        .chart-container { height: 320px; margin-top: 16px; }
+        .chart-container-lg { height: 380px; margin-top: 12px; }
+        .chart-container-sm { height: 200px; }
+
+        .ai-panel {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #334155;
+        }
+        .ai-badge {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .ai-title { font-size: 16px; font-weight: 600; }
+        .ai-insight {
+            padding: 12px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+            border-left: 3px solid #3b82f6;
+        }
+        .ai-insight.warning { border-left-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+        .ai-insight.success { border-left-color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .ai-insight.alert { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .insight-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        .table th, .table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+            font-size: 13px;
+        }
+        .table th { color: #94a3b8; font-weight: 500; }
+        .table tr:hover { background: rgba(255,255,255,0.02); }
+
+        .progress-bar {
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .footer {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* Navigation */
+        .dashboard-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .nav-link {
+            flex: 1;
+            padding: 18px 24px;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+            color: #e2e8f0;
+            border-color: #475569;
+        }
+        .nav-link.active {
+            background: linear-gradient(180deg, #1e3a3a 0%, #0f2a2a 100%);
+            border-color: #2dd4bf40;
+            color: #5eead4;
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.15);
+        }
+
+        /* Sparklines with axes */
+        .sparkline-container { height: 100px; margin: 8px 0; }
+
+        /* Header enhancements */
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .btn-export {
+            padding: 8px 14px;
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            color: #e2e8f0;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-export:hover { background: #475569; }
+        .live-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-left: 8px;
+            animation: pulse-live 2s infinite;
+        }
+        @keyframes pulse-live {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+        }
+
+        /* P&L Table enhancements */
+        .total-col {
+            background: rgba(59, 130, 246, 0.1);
+            font-weight: 600;
+            border-left: 2px solid #3b82f6;
+        }
+        .warning-cell { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+        .success-cell { background: rgba(34, 197, 94, 0.1); }
+
+        /* Liquidity KPIs */
+        .kpi-mini { padding: 16px; }
+        .kpi-mini .card-value { font-size: 22px; }
+        .kpi-dso { background: rgba(239, 68, 68, 0.2); }
+        .kpi-bad-debt { background: rgba(245, 158, 11, 0.2); }
+        .kpi-quick { background: rgba(34, 197, 94, 0.2); }
+        .kpi-collection { background: rgba(59, 130, 246, 0.2); }
+        .severity-critical { color: #ef4444; font-weight: 600; }
+        .severity-warning { color: #f59e0b; }
+        .severity-good { color: #22c55e; }
+
+        /* Collection Priorities Table */
+        .priority-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .priority-high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .priority-medium { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .priority-low { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .contact-link { color: #60a5fa; text-decoration: none; font-size: 11px; }
+        .contact-link:hover { text-decoration: underline; }
+
+        /* Credit Breach Items */
+        .breach-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 3px solid #ef4444;
+            margin-bottom: 8px;
+            border-radius: 0 6px 6px 0;
+        }
+        .breach-amount { font-weight: 600; color: #ef4444; }
+        .breach-limit { color: #64748b; font-size: 11px; }
+
+        /* Quarterly Comparison */
+        .quarter-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .quarter-value { font-size: 24px; font-weight: 700; color: #e2e8f0; }
+        .quarter-label { font-size: 11px; color: #94a3b8; margin-bottom: 4px; }
+        .quarter-change { font-size: 12px; margin-top: 4px; }
+
+        /* Grid 5 for KPIs */
+        .grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+        /* Mobile responsive */
+        @media (max-width: 1400px) {
+            .grid-5 { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 1200px) {
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-5 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: 1fr; }
+            .quarter-card { padding: 12px; }
+            .quarter-value { font-size: 20px; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .grid-4 { grid-template-columns: 1fr; }
+            .grid-5 { grid-template-columns: 1fr; }
+            .dashboard-nav { flex-wrap: wrap; }
+            .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .header-actions { width: 100%; justify-content: space-between; }
+            .card-value { font-size: 24px; }
+            .ai-panel { order: -1; }
+            .breach-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .table { font-size: 12px; }
+            .table th, .table td { padding: 8px 6px; }
+        }
+        @media (max-width: 480px) {
+            .header h1 { font-size: 18px; }
+            .nav-link { padding: 8px 12px; font-size: 12px; }
+            .btn-export span:first-child { display: none; }
+            .chart-container { height: 220px; }
+            .kpi-mini .card-value { font-size: 18px; }
+            .quarter-card { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="subtitle">Data as of 27 Dec 2024, 9:30 AM</div>
+        </div>
+    </div>
+
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav">
+        <a href="Dashboard-1-Executive-Finance.html" class="nav-link active">FINANCE</a>
+        <a href="Dashboard-2-Sales-Actions.html" class="nav-link">FORESIGHT</a>
+    </nav>
+
+    <!-- KPI Cards - Real Data from Supabase -->
+    <div class="grid grid-4" style="margin-bottom: 20px;">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">YTD Revenue</div>
+                <div class="kpi-icon kpi-revenue">$</div>
+            </div>
+            <div class="card-value">$2.23M</div>
+            <div class="card-change positive">▲ 12.4% vs prior year</div>
+            <div class="sparkline-container"><canvas id="sparkline-revenue"></canvas></div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 56%; background: linear-gradient(90deg, #22c55e, #16a34a);"></div>
+            </div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">56% of $4.0M target</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Gross Profit</div>
+                <div class="kpi-icon kpi-profit">%</div>
+            </div>
+            <div class="card-value">$1.29M</div>
+            <div class="card-change positive">▲ 64.3% margin</div>
+            <div class="sparkline-container"><canvas id="sparkline-gp"></canvas></div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 64%; background: linear-gradient(90deg, #3b82f6, #2563eb);"></div>
+            </div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">Target: 55% GP ✓ Exceeding</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Operating Expenses</div>
+                <div class="kpi-icon kpi-margin">−</div>
+            </div>
+            <div class="card-value">$1.06M</div>
+            <div class="card-change neutral">◆ 47% of revenue</div>
+            <div class="sparkline-container"><canvas id="sparkline-opex"></canvas></div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 53%; background: linear-gradient(90deg, #a855f7, #7c3aed);"></div>
+            </div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">53% of $2M annual budget</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Accounts Receivable</div>
+                <div class="kpi-icon kpi-cash">$</div>
+            </div>
+            <div class="card-value">$562K</div>
+            <div class="card-change neutral">◆ 97 invoices outstanding</div>
+            <div class="sparkline-container"><canvas id="sparkline-cash"></canvas></div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 79%; background: linear-gradient(90deg, #22c55e, #16a34a);"></div>
+                <div class="progress-fill" style="width: 15%; background: linear-gradient(90deg, #f59e0b, #d97706); margin-left: 79%;"></div>
+            </div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">$26K bad debt exposure (4.6%)</div>
+        </div>
+    </div>
+
+    <!-- Liquidity & Risk Metrics Row - CFO Critical KPIs -->
+    <div class="grid grid-5" style="margin-bottom: 20px;">
+        <div class="card kpi-mini">
+            <div class="card-header">
+                <div class="card-title">DSO (Days Sales Outstanding)</div>
+                <div class="kpi-icon kpi-quick">⏱</div>
+            </div>
+            <div class="card-value severity-good">8 days</div>
+            <div class="card-change positive">▲ Excellent - Industry avg: 45 days</div>
+            <div style="font-size: 10px; color: #64748b; margin-top: 8px;">
+                $562K AR ÷ $72K daily revenue
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #334155;">
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #22c55e;">97</div><div style="font-size: 8px; color: #64748b;">Invoices</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #3b82f6;">45d</div><div style="font-size: 8px; color: #64748b;">Ind. Avg</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #22c55e;">-82%</div><div style="font-size: 8px; color: #64748b;">vs Avg</div></div>
+            </div>
+        </div>
+
+        <div class="card kpi-mini">
+            <div class="card-header">
+                <div class="card-title">Bad Debt Exposure</div>
+                <div class="kpi-icon kpi-bad-debt">⚠</div>
+            </div>
+            <div class="card-value severity-warning">$25.9K</div>
+            <div class="card-change neutral">◆ 4.6% of total AR</div>
+            <div style="font-size: 10px; color: #64748b; margin-top: 8px;">
+                90+ days: $963 at 3% recovery rate
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #334155;">
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #f59e0b;">$29K</div><div style="font-size: 8px; color: #64748b;">31-60d</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #f97316;">$815</div><div style="font-size: 8px; color: #64748b;">61-90d</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #ef4444;">$963</div><div style="font-size: 8px; color: #64748b;">90+d</div></div>
+            </div>
+        </div>
+
+        <div class="card kpi-mini">
+            <div class="card-header">
+                <div class="card-title">Expected Collections</div>
+                <div class="kpi-icon kpi-collection">💰</div>
+            </div>
+            <div class="card-value severity-good">$536K</div>
+            <div class="card-change positive">▲ 95.4% collection rate</div>
+            <div style="font-size: 10px; color: #64748b; margin-top: 8px;">
+                $26K provision for doubtful debts
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #334155;">
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #22c55e;">$445K</div><div style="font-size: 8px; color: #64748b;">Current</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #3b82f6;">$86K</div><div style="font-size: 8px; color: #64748b;">1-30d</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #f59e0b;">$5K</div><div style="font-size: 8px; color: #64748b;">At Risk</div></div>
+            </div>
+        </div>
+
+        <div class="card kpi-mini">
+            <div class="card-header">
+                <div class="card-title">Credit Breaches</div>
+                <div class="kpi-icon kpi-dso">🚫</div>
+            </div>
+            <div class="card-value severity-critical">12 accounts</div>
+            <div class="card-change negative">▼ $492K over limits</div>
+            <div style="font-size: 10px; color: #64748b; margin-top: 8px;">
+                5 with NO credit limit set ($259K)
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #334155;">
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #ef4444;">$214K</div><div style="font-size: 8px; color: #64748b;">Top 1</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #f59e0b;">871%</div><div style="font-size: 8px; color: #64748b;">Worst %</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #ef4444;">5</div><div style="font-size: 8px; color: #64748b;">No Limit</div></div>
+            </div>
+        </div>
+
+        <div class="card kpi-mini">
+            <div class="card-header">
+                <div class="card-title">YoY Revenue Change</div>
+                <div class="kpi-icon kpi-bad-debt">📉</div>
+            </div>
+            <div class="card-value severity-critical">-53%</div>
+            <div class="card-change negative">▼ Q4'25 vs Q4'24</div>
+            <div style="font-size: 10px; color: #64748b; margin-top: 8px;">
+                $813K vs $1.73M (-$917K gap)
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #334155;">
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #ef4444;">-20%</div><div style="font-size: 8px; color: #64748b;">Orders</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #ef4444;">-25%</div><div style="font-size: 8px; color: #64748b;">AOV</div></div>
+                <div style="text-align: center;"><div style="font-size: 12px; font-weight: 600; color: #ef4444;">-14%</div><div style="font-size: 8px; color: #64748b;">Customers</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid grid-3" style="margin-bottom: 20px;">
+        <div class="card">
+            <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Monthly Revenue: Budget vs Actual (FY25 YTD)</span>
+                <div style="display: flex; gap: 12px; font-size: 10px;">
+                    <span style="color: #22c55e;">YTD: $2.21M</span>
+                    <span style="color: #475569;">Budget: $6.13M</span>
+                    <span style="color: #78716c;">3yr Avg: $4.60M</span>
+                </div>
+            </div>
+            <div class="chart-container-lg">
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #334155;">
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; font-weight: 700; color: #22c55e;">$2.21M</div>
+                    <div style="font-size: 10px; color: #64748b;">YTD Actual</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; font-weight: 700; color: #94a3b8;">$2.15M</div>
+                    <div style="font-size: 10px; color: #64748b;">YTD Budget</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; font-weight: 700; color: #22c55e;">+3%</div>
+                    <div style="font-size: 10px; color: #64748b;">Variance</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; font-weight: 700; color: #3b82f6;">$4.0M</div>
+                    <div style="font-size: 10px; color: #64748b;">FY Target</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; font-weight: 700; color: #f59e0b;">55%</div>
+                    <div style="font-size: 10px; color: #64748b;">% to Target</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-panel" style="height: 100%; max-height: 520px; overflow-y: auto;">
+            <div class="ai-header">
+                <div class="ai-badge">AI INSIGHTS</div>
+                <div class="ai-title">Financial Analysis</div>
+                <div style="margin-left: auto; font-size: 10px; color: #64748b;">Live from Supabase · 27 Dec 2025</div>
+            </div>
+
+            <!-- CRITICAL: Margin Erosion on Major Account -->
+            <div class="ai-insight alert">
+                <div class="insight-label">🚨 Margin Alert: Nutrien @ 22% GP</div>
+                <strong>$2.0M revenue</strong> at only <strong>22.2% margin</strong> vs company avg 54%.
+                <br>Compare: Oasis Pacific $2.5M @ 63% margin, Living Turf $3.4M @ 52%.
+                <br><strong>Impact:</strong> $640K revenue generating only $142K GP. Below breakeven?
+                <br><em>Action: Review Nutrien pricing structure. Margin floor = 35% minimum.</em>
+            </div>
+
+            <!-- CRITICAL: Revenue Concentration -->
+            <div class="ai-insight alert">
+                <div class="insight-label">🚨 Top 5 Customers = 73% Revenue</div>
+                <strong>$13.2M</strong> from 5 accounts: Living Turf, ACE Ohlsson, Oasis, Advanced Nutrients, Nutrien.
+                <br>Loss of <strong>any one</strong> = 14-19% revenue hit. Benchmark: top 5 should be &lt;50%.
+                <br><em>Action: Diversification target - reduce to 60% by FY26 via distributor expansion.</em>
+            </div>
+
+            <!-- WARNING: Seasonal Cash Planning -->
+            <div class="ai-insight warning">
+                <div class="insight-label">⚠️ Jan-Feb Cash Crunch Alert</div>
+                <strong>Pattern:</strong> Dec shutdown ($474K) → slow Jan recovery while expenses continue.
+                <br>Winter crop inventory build requires <strong>$200K+</strong> working capital in Jan.
+                <br>BAS Q2 payment due Feb 28 - ensure reserves.
+                <br><em>Action: Accelerate Dec collections. Confirm seasonal facility availability.</em>
+            </div>
+
+            <!-- WARNING: Credit Risk -->
+            <div class="ai-insight warning">
+                <div class="insight-label">⚠️ Credit Breaches - 5 Accounts</div>
+                <strong>$172K</strong> exposure: WCT (871%), Elders (626%), Fernland (529%) of limits.
+                <br>Ruralco rated "Very Poor Payer" - avg 63 days late, $17K outstanding.
+                <br><em>Action: COD for accounts >200% limit. Credit review for Ruralco.</em>
+            </div>
+
+            <!-- WARNING: Margin Volatility -->
+            <div class="ai-insight warning">
+                <div class="insight-label">⚠️ Margin Swing: 72% → 50%</div>
+                <strong>21-point collapse</strong> Q2→Q4 2023. Cause: product mix shift to commodities.
+                <br>Custom blends: 80-100% margin. NPK concentrates: 44-58% margin.
+                <br><em>Action: Sales incentive restructure - weight toward custom blend revenue.</em>
+            </div>
+
+            <!-- SUCCESS: DSO Performance -->
+            <div class="ai-insight success">
+                <div class="insight-label">✓ DSO Best-in-Class: 8 Days</div>
+                Industry avg: <strong>45 days</strong>. AgroBest: <strong>8 days</strong>. Top 5% nationally.
+                <br>AR breakdown: $445K current, $86K 1-30d, only $30K 31-60d.
+                <br><em>Maintain: Credit control processes exceptional. Consider 2% early-pay discount.</em>
+            </div>
+
+            <!-- SUCCESS: Custom Blend Strategy -->
+            <div class="ai-insight success">
+                <div class="insight-label">✓ Custom Blends = Profit Engine</div>
+                <strong>KOMPLETE:</strong> $1.78M @ 100% margin (Advanced Nutrients exclusive).
+                <br><strong>MP BRILLIANCE:</strong> $1.32M @ 80% margin (Living Turf proprietary).
+                <br><em>Opportunity: Replicate model - target Oasis Pacific for custom blend.</em>
+            </div>
+
+            <!-- SEASONAL CONTEXT -->
+            <div style="margin-top: 12px; padding: 10px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 6px; font-size: 11px;">
+                <strong>🌱 Summer Season (Dec-Feb) Context:</strong>
+                <br>• Peak: Turf/horticulture (Living Turf, nurseries) - push foliar nutrition
+                <br>• Quiet: Broadacre grain customers until autumn planting (Mar-May)
+                <br>• Weather: La Niña → above-avg rainfall QLD/NSW → increased liquid demand
+                <br>• Product focus: Crop protection, irrigation-compatible formulations
+            </div>
+
+            <!-- CFO ACTION MATRIX -->
+            <div style="margin-top: 12px; padding: 10px; background: rgba(59, 130, 246, 0.1); border-radius: 6px; font-size: 11px;">
+                <strong>📊 CFO Priority Matrix:</strong>
+                <table style="width: 100%; font-size: 10px; margin-top: 6px; border-collapse: collapse;">
+                    <tr style="color: #ef4444;"><td style="padding: 2px 0;">1. URGENT</td><td>Nutrien margin review - $640K at 22% GP</td></tr>
+                    <tr style="color: #ef4444;"><td style="padding: 2px 0;">2. URGENT</td><td>COD enforcement on 5 credit breaches</td></tr>
+                    <tr style="color: #f59e0b;"><td style="padding: 2px 0;">3. This Week</td><td>Jan cash forecast - seasonal facility?</td></tr>
+                    <tr style="color: #f59e0b;"><td style="padding: 2px 0;">4. Q1 FY25</td><td>Customer diversification strategy</td></tr>
+                    <tr style="color: #22c55e;"><td style="padding: 2px 0;">5. Ongoing</td><td>Custom blend expansion - Oasis target</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="grid grid-2">
+        <div class="card">
+            <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Expense Breakdown by Category</span>
+                <div style="font-size: 11px; color: #64748b;">YTD Total: $1.46M | Budget: $1.40M | <span style="color: #ef4444;">+4.3%</span></div>
+            </div>
+
+            <!-- COGS Summary (separated to not skew chart) -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; padding: 12px; background: rgba(30, 41, 59, 0.5); border-radius: 8px; border: 1px solid #334155;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">COGS - Materials</div>
+                        <div style="font-size: 20px; font-weight: 700; color: #f1f5f9;">$756K</div>
+                        <div style="font-size: 10px; color: #f59e0b;">+5% vs Budget ($720K)</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">COGS - Freight</div>
+                        <div style="font-size: 20px; font-weight: 700; color: #f1f5f9;">$187K</div>
+                        <div style="font-size: 10px; color: #ef4444;">+17% vs Budget ($160K)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="font-size: 11px; color: #64748b; margin-bottom: 8px; font-weight: 600;">Operating Expenses (excl. COGS)</div>
+            <div class="chart-container" style="height: 260px;">
+                <canvas id="expenseChart"></canvas>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #334155;">
+                <div style="text-align: center;">
+                    <div style="font-size: 16px; font-weight: 700; color: #ef4444;">$943K</div>
+                    <div style="font-size: 9px; color: #64748b;">COGS (65%)</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 16px; font-weight: 700; color: #3b82f6;">$237K</div>
+                    <div style="font-size: 9px; color: #64748b;">Personnel (16%)</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 16px; font-weight: 700; color: #f59e0b;">$156K</div>
+                    <div style="font-size: 9px; color: #64748b;">Operations (11%)</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 16px; font-weight: 700; color: #a855f7;">$125K</div>
+                    <div style="font-size: 9px; color: #64748b;">Other (8%)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Monthly P&L Summary <span style="font-size: 11px; color: #64748b;">(Live from Supabase)</span></div>
+            <div style="overflow-x: auto;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Jul</th>
+                        <th>Aug</th>
+                        <th>Sep</th>
+                        <th>Oct</th>
+                        <th>Nov</th>
+                        <th class="total-col">YTD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Revenue</td>
+                        <td>$509K</td>
+                        <td>$388K</td>
+                        <td class="success-cell">$521K</td>
+                        <td>$398K</td>
+                        <td>$397K</td>
+                        <td class="total-col">$2.23M</td>
+                    </tr>
+                    <tr style="color: #94a3b8; font-size: 12px;">
+                        <td>COGS</td>
+                        <td>$187K</td>
+                        <td>$168K</td>
+                        <td>$221K</td>
+                        <td>$181K</td>
+                        <td>$186K</td>
+                        <td class="total-col">$943K</td>
+                    </tr>
+                    <tr>
+                        <td>Gross Profit</td>
+                        <td class="positive">$322K</td>
+                        <td class="positive">$220K</td>
+                        <td class="positive">$300K</td>
+                        <td class="positive">$217K</td>
+                        <td class="positive">$211K</td>
+                        <td class="total-col positive">$1.29M</td>
+                    </tr>
+                    <tr style="background: rgba(245, 158, 11, 0.05);">
+                        <td>GP %</td>
+                        <td class="success-cell">63.4%</td>
+                        <td>56.7%</td>
+                        <td>57.5%</td>
+                        <td>54.6%</td>
+                        <td class="warning-cell">53.1%</td>
+                        <td class="total-col">57.8%</td>
+                    </tr>
+                    <tr>
+                        <td>Operating Exp</td>
+                        <td>$254K</td>
+                        <td>$201K</td>
+                        <td>$182K</td>
+                        <td class="warning-cell">$217K</td>
+                        <td>$188K</td>
+                        <td class="total-col">$1.06M</td>
+                    </tr>
+                    <tr style="border-top: 2px solid #475569; font-weight: 600;">
+                        <td>Net Profit</td>
+                        <td class="positive">$68K</td>
+                        <td class="positive">$19K</td>
+                        <td class="positive success-cell">$118K</td>
+                        <td class="warning-cell">$1K</td>
+                        <td class="positive">$23K</td>
+                        <td class="total-col positive">$230K</td>
+                    </tr>
+                    <tr style="background: rgba(59, 130, 246, 0.05);">
+                        <td>Net Margin %</td>
+                        <td>13.4%</td>
+                        <td>4.9%</td>
+                        <td class="success-cell">22.6%</td>
+                        <td class="warning-cell">0.2%</td>
+                        <td>5.8%</td>
+                        <td class="total-col">10.3%</td>
+                    </tr>
+                    <tr style="color: #94a3b8; font-size: 12px;">
+                        <td>EBITDA</td>
+                        <td>$74K</td>
+                        <td>$25K</td>
+                        <td class="success-cell">$124K</td>
+                        <td>$7K</td>
+                        <td>$29K</td>
+                        <td class="total-col">$259K</td>
+                    </tr>
+                    <tr style="color: #94a3b8; font-size: 12px;">
+                        <td>AR Balance</td>
+                        <td>$445K</td>
+                        <td>$480K</td>
+                        <td>$520K</td>
+                        <td>$540K</td>
+                        <td>$562K</td>
+                        <td class="total-col">$562K</td>
+                    </tr>
+                    <tr style="color: #94a3b8; font-size: 12px;">
+                        <td>Orders</td>
+                        <td>42</td>
+                        <td>38</td>
+                        <td>51</td>
+                        <td>44</td>
+                        <td>41</td>
+                        <td class="total-col">216</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- AR Aging & Collection Actions Row -->
+    <div class="grid grid-2" style="margin-top: 20px;">
+        <div class="card">
+            <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>AR Aging Breakdown</span>
+                <div style="font-size: 11px;">
+                    <span style="color: #22c55e;">●</span> 79% Current |
+                    <span style="color: #f59e0b;">●</span> 21% Overdue |
+                    DSO: <span style="color: #22c55e; font-weight: 600;">8 days</span>
+                </div>
+            </div>
+            <div class="chart-container chart-container-sm">
+                <canvas id="arAgingChart"></canvas>
+            </div>
+            <div style="margin-top: 12px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; text-align: center;">
+                <div style="background: rgba(34, 197, 94, 0.1); padding: 8px; border-radius: 6px;">
+                    <div style="font-size: 16px; font-weight: 600; color: #22c55e;">$445K</div>
+                    <div style="font-size: 10px; color: #64748b;">Current (79%)</div>
+                    <div style="font-size: 9px; color: #22c55e;">▲ 98% recovery</div>
+                </div>
+                <div style="background: rgba(59, 130, 246, 0.1); padding: 8px; border-radius: 6px;">
+                    <div style="font-size: 16px; font-weight: 600; color: #3b82f6;">$86K</div>
+                    <div style="font-size: 10px; color: #64748b;">1-30 Days (15%)</div>
+                    <div style="font-size: 9px; color: #3b82f6;">▲ 95% recovery</div>
+                </div>
+                <div style="background: rgba(245, 158, 11, 0.1); padding: 8px; border-radius: 6px;">
+                    <div style="font-size: 16px; font-weight: 600; color: #f59e0b;">$29K</div>
+                    <div style="font-size: 10px; color: #64748b;">31-60 Days (5%)</div>
+                    <div style="font-size: 9px; color: #f59e0b;">◆ 85% recovery</div>
+                </div>
+                <div style="background: rgba(249, 115, 22, 0.1); padding: 8px; border-radius: 6px;">
+                    <div style="font-size: 16px; font-weight: 600; color: #f97316;">$815</div>
+                    <div style="font-size: 10px; color: #64748b;">61-90 Days</div>
+                    <div style="font-size: 9px; color: #f97316;">▼ 50% recovery</div>
+                </div>
+                <div style="background: rgba(239, 68, 68, 0.1); padding: 8px; border-radius: 6px;">
+                    <div style="font-size: 16px; font-weight: 600; color: #ef4444;">$963</div>
+                    <div style="font-size: 10px; color: #64748b;">90+ Days</div>
+                    <div style="font-size: 9px; color: #ef4444;">▼ 3% recovery</div>
+                </div>
+            </div>
+            <div style="margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                <div style="padding: 8px; background: rgba(34, 197, 94, 0.05); border-radius: 6px; text-align: center;">
+                    <div style="font-size: 14px; font-weight: 700; color: #22c55e;">$536K</div>
+                    <div style="font-size: 9px; color: #64748b;">Expected Collection</div>
+                </div>
+                <div style="padding: 8px; background: rgba(239, 68, 68, 0.05); border-radius: 6px; text-align: center;">
+                    <div style="font-size: 14px; font-weight: 700; color: #ef4444;">$26K</div>
+                    <div style="font-size: 9px; color: #64748b;">Est. Bad Debt (4.6%)</div>
+                </div>
+                <div style="padding: 8px; background: rgba(59, 130, 246, 0.05); border-radius: 6px; text-align: center;">
+                    <div style="font-size: 14px; font-weight: 700; color: #3b82f6;">97</div>
+                    <div style="font-size: 9px; color: #64748b;">Open Invoices</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title" style="display: flex; justify-content: space-between;">
+                <span>Collection Priorities <span style="font-size: 11px; color: #64748b;">(Action Required)</span></span>
+                <span style="font-size: 11px; color: #ef4444;">Total: $418K overdue</span>
+            </div>
+            <table class="table" style="margin-top: 6px; font-size: 11px;">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Owed</th>
+                        <th>Days</th>
+                        <th>Tier</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: rgba(239, 68, 68, 0.08);">
+                        <td><strong>Living Turf Marrickville</strong> <a href="mailto:invoicing@livingturf.com" class="contact-link">✉</a></td>
+                        <td class="negative">$215K</td>
+                        <td>27d</td>
+                        <td><span class="priority-badge priority-high">T1</span></td>
+                        <td>Payment reminder</td>
+                    </tr>
+                    <tr style="background: rgba(239, 68, 68, 0.08);">
+                        <td><strong>Oasis Pacific</strong> <a href="mailto:rickh@oasisturf.com.au" class="contact-link">✉</a></td>
+                        <td class="negative">$67K</td>
+                        <td>Current</td>
+                        <td><span class="priority-badge priority-high">T2</span></td>
+                        <td>Monitor aging</td>
+                    </tr>
+                    <tr style="background: rgba(239, 68, 68, 0.08);">
+                        <td><strong>Ace Ohlsson</strong> <a href="mailto:caaps@aceohlsson.com.au" class="contact-link">✉</a></td>
+                        <td class="negative">$61K</td>
+                        <td>12d</td>
+                        <td><span class="priority-badge priority-high">T2</span></td>
+                        <td>Payment reminder</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Greenshed NZ</strong> <a href="mailto:invoicingnz@livingturf.com" class="contact-link">✉</a></td>
+                        <td class="neutral">$38K</td>
+                        <td>Current</td>
+                        <td><span class="priority-badge priority-medium">T3</span></td>
+                        <td>Monitor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Elders Primac</strong> <a href="mailto:D365.AP@elders.com.au" class="contact-link">✉</a></td>
+                        <td class="neutral">$31K</td>
+                        <td>27d</td>
+                        <td><span class="priority-badge priority-medium">T3</span></td>
+                        <td>Payment reminder</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Burdekin Grower</strong> <a href="mailto:bgsayr@bigpond.com" class="contact-link">✉</a></td>
+                        <td class="neutral">$24K</td>
+                        <td>58d</td>
+                        <td><span class="priority-badge priority-high">T2</span></td>
+                        <td>Follow-up call</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ruralco Limited</strong> <a href="mailto:ruralcoprints@ruralco.com.au" class="contact-link">✉</a></td>
+                        <td class="neutral">$17K</td>
+                        <td style="color: #ef4444; font-weight: 600;">211d</td>
+                        <td><span class="priority-badge priority-medium">T3</span></td>
+                        <td>Escalate</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: right; margin-top: 8px;">
+                <button class="btn-export" style="font-size: 10px;">📧 Send Batch Reminders</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credit Breaches & Win-Back Opportunities -->
+    <div class="grid grid-2" style="margin-top: 20px;">
+        <div class="card">
+            <div class="card-title">Credit Limit Breaches <span style="font-size: 11px; color: #ef4444;">(12 Accounts - $492K Exposure)</span></div>
+            <div style="margin-top: 8px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;">
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Living Turf Marrickville</strong>
+                        <span class="breach-limit">No limit set</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$214K</div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Oasis Pacific</strong>
+                        <span class="breach-limit">Limit: $50K</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$67K <span style="font-size: 9px;">(134%)</span></div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ace Ohlsson</strong>
+                        <span class="breach-limit">Limit: $60K</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$61K <span style="font-size: 9px;">(101%)</span></div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Greenshed NZ</strong>
+                        <span class="breach-limit">Limit: $10K</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$38K <span style="font-size: 9px;">(380%)</span></div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Elders - Primac</strong>
+                        <span class="breach-limit">Limit: $5K</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$31K <span style="font-size: 9px;">(626%)</span></div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Fernland Agencies</strong>
+                        <span class="breach-limit">Limit: $5K</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$26K <span style="font-size: 9px;">(529%)</span></div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Wood AG</strong>
+                        <span class="breach-limit">No limit set</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$14K</div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">WCT Wudinna</strong>
+                        <span class="breach-limit">Limit: $1K</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$9K <span style="font-size: 9px;">(871%)</span></div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Terralift Australia</strong>
+                        <span class="breach-limit">No limit set</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$8K</div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Martion Rural</strong>
+                        <span class="breach-limit">No limit set</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$8K</div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">DGL Operations</strong>
+                        <span class="breach-limit">No limit set</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$7K</div>
+                </div>
+                <div class="breach-item" style="padding: 6px 8px; margin: 0;">
+                    <div style="flex: 1; min-width: 0;">
+                        <strong style="font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Loral Ipsum</strong>
+                        <span class="breach-limit">Limit: $2.5K</span>
+                    </div>
+                    <div class="breach-amount" style="font-size: 12px;">$7K <span style="font-size: 9px;">(291%)</span></div>
+                </div>
+            </div>
+            <div style="margin-top: 8px; padding: 8px; background: rgba(239, 68, 68, 0.1); border-radius: 6px; font-size: 10px; color: #f87171;">
+                <strong>⚠️ 5 accounts have NO credit limit set</strong> - Review and assign limits immediately
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Dormant Customer Opportunities <span style="font-size: 11px; color: #22c55e;">(Win-Back Revenue: $668K)</span></div>
+            <table class="table" style="margin-top: 8px; font-size: 11px;">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>LTV</th>
+                        <th>Dormant</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>AG Plus Consultancy</strong><br>
+                            <a href="mailto:payables@agplushealth.com" class="contact-link">✉ payables@agplushealth.com</a>
+                        </td>
+                        <td class="positive">$265K</td>
+                        <td>514d</td>
+                        <td><span class="priority-badge priority-high">P1</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>McGregor Gourlay Rural</strong><br>
+                            <a href="mailto:accountspayable@mgruralservices.com.au" class="contact-link">✉ AP@mgruralservices</a>
+                        </td>
+                        <td class="positive">$166K</td>
+                        <td>423d</td>
+                        <td><span class="priority-badge priority-high">P1</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Chem Pack Pty Ltd</strong><br>
+                            <a href="mailto:accounts@chempack.com.au" class="contact-link">✉ accounts@chempack.com.au</a>
+                        </td>
+                        <td class="neutral">$90K</td>
+                        <td>1,536d</td>
+                        <td><span class="priority-badge priority-medium">P2</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Pioneer Ecoscience</strong><br>
+                            <a href="mailto:yukiyosi@aaaphj.co.jp" class="contact-link">✉ yukiyosi@aaaphj.co.jp</a>
+                        </td>
+                        <td class="neutral">$61K</td>
+                        <td>1,398d</td>
+                        <td><span class="priority-badge priority-medium">P2</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Smartwares Australia</strong><br>
+                            <a href="mailto:accounts@taskmasterhardware.com.au" class="contact-link">✉ accounts@taskmaster</a>
+                        </td>
+                        <td class="neutral">$51K</td>
+                        <td>983d</td>
+                        <td><span class="priority-badge priority-low">P3</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Coastal Rural (Soils First NQ)</strong><br>
+                            <a href="mailto:chris@soilsfirstnq.com" class="contact-link">✉ chris@soilsfirstnq.com</a>
+                        </td>
+                        <td class="neutral">$35K</td>
+                        <td>1,569d</td>
+                        <td><span class="priority-badge priority-low">P3</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: right; margin-top: 8px;">
+                <button class="btn-export" style="font-size: 10px;">📧 Launch Win-Back Campaign</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quarterly Performance Comparison -->
+    <div class="card" style="margin-top: 20px;">
+        <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Quarterly Performance: Q4 2025 vs Q4 2024</span>
+            <div style="display: flex; gap: 12px; font-size: 11px;">
+                <span style="color: #ef4444; font-weight: 600;">⚠️ Revenue Gap: -$917K</span>
+                <span style="color: #64748b;">Oct-Dec FY25</span>
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 16px;">
+            <div class="quarter-card">
+                <div class="quarter-label">Q4 Revenue</div>
+                <div class="quarter-value">$813K</div>
+                <div class="quarter-change negative">▼ 53% vs $1.73M</div>
+            </div>
+            <div class="quarter-card">
+                <div class="quarter-label">Orders</div>
+                <div class="quarter-value">130</div>
+                <div class="quarter-change negative">▼ 20% vs 163</div>
+            </div>
+            <div class="quarter-card">
+                <div class="quarter-label">Avg Order Value</div>
+                <div class="quarter-value">$10,091</div>
+                <div class="quarter-change negative">▼ 25% vs $13,534</div>
+            </div>
+            <div class="quarter-card">
+                <div class="quarter-label">Unique Customers</div>
+                <div class="quarter-value">32</div>
+                <div class="quarter-change negative">▼ 14% vs 37</div>
+            </div>
+            <div class="quarter-card">
+                <div class="quarter-label">Products Ordered</div>
+                <div class="quarter-value">122</div>
+                <div class="quarter-change neutral">◆ -1 vs 123</div>
+            </div>
+            <div class="quarter-card">
+                <div class="quarter-label">Fulfillment Rate</div>
+                <div class="quarter-value severity-good">100%</div>
+                <div class="quarter-change positive">✓ On target</div>
+            </div>
+        </div>
+        <div style="margin-top: 16px; display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+            <div style="padding: 12px; background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; border-radius: 0 6px 6px 0;">
+                <div style="font-size: 12px; font-weight: 600; color: #f87171; margin-bottom: 6px;">📉 Root Cause Analysis</div>
+                <ul style="font-size: 11px; color: #94a3b8; margin: 0; padding-left: 16px; line-height: 1.6;">
+                    <li><strong>Customer churn:</strong> 5 customers from Q4'24 didn't reorder (Focus on: AG Plus, McGregor Gourlay)</li>
+                    <li><strong>Lower order frequency:</strong> Active customers ordering 20% less frequently</li>
+                    <li><strong>Basket size drop:</strong> Average order value down $3,443 (-25%)</li>
+                    <li><strong>Seasonal timing:</strong> Late harvest season delayed orders into Jan</li>
+                </ul>
+            </div>
+            <div style="padding: 12px; background: rgba(59, 130, 246, 0.08); border-left: 3px solid #3b82f6; border-radius: 0 6px 6px 0;">
+                <div style="font-size: 12px; font-weight: 600; color: #60a5fa; margin-bottom: 6px;">📋 Recommended Actions</div>
+                <ul style="font-size: 11px; color: #94a3b8; margin: 0; padding-left: 16px; line-height: 1.6;">
+                    <li>Win-back campaign for 3 high-value dormant customers ($1M+ LTV)</li>
+                    <li>Review pricing competitiveness vs. competitors</li>
+                    <li>Q1 push: Bundle promotions to increase AOV</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Concentration Risk -->
+    <div class="card" style="margin-top: 20px;">
+        <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Product Concentration Risk <span style="font-size: 11px; color: #f59e0b;">(3-Year Revenue: $26.7M)</span></span>
+            <div style="font-size: 11px;"><span style="color: #ef4444; font-weight: 600;">4 CRITICAL</span> · <span style="color: #f59e0b;">1 HIGH</span> · <span style="color: #22c55e;">4 LOW</span></div>
+        </div>
+        <table class="table" style="margin-top: 8px; font-size: 11px;">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>3yr Revenue</th>
+                    <th>% Total</th>
+                    <th style="text-align: center;">Cust</th>
+                    <th>#1 Customer</th>
+                    <th>Margin</th>
+                    <th>Risk</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: rgba(239, 68, 68, 0.12);">
+                    <td><strong>KOMPLETE</strong></td>
+                    <td>$2.57M</td>
+                    <td style="font-weight: 600;">9.6%</td>
+                    <td class="negative" style="text-align: center; font-weight: 700;">1</td>
+                    <td style="font-size: 10px;">Advanced Nutrients</td>
+                    <td class="positive">100%</td>
+                    <td><span class="priority-badge priority-high">CRITICAL</span></td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.12);">
+                    <td><strong>MP BRILLIANCE</strong></td>
+                    <td>$2.40M</td>
+                    <td style="font-weight: 600;">9.0%</td>
+                    <td class="negative" style="text-align: center; font-weight: 700;">1</td>
+                    <td style="font-size: 10px;">Living Turf Marrickville</td>
+                    <td class="positive">90%</td>
+                    <td><span class="priority-badge priority-high">CRITICAL</span></td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.12);">
+                    <td><strong>POPSTART NP</strong></td>
+                    <td>$1.75M</td>
+                    <td style="font-weight: 600;">6.5%</td>
+                    <td class="negative" style="text-align: center; font-weight: 700;">1</td>
+                    <td style="font-size: 10px;">Nutrien Australia</td>
+                    <td>58%</td>
+                    <td><span class="priority-badge priority-high">CRITICAL</span></td>
+                </tr>
+                <tr style="background: rgba(239, 68, 68, 0.12);">
+                    <td><strong>MP ENHANCE</strong></td>
+                    <td>$1.20M</td>
+                    <td style="font-weight: 600;">4.5%</td>
+                    <td class="negative" style="text-align: center; font-weight: 700;">1</td>
+                    <td style="font-size: 10px;">Living Turf Marrickville</td>
+                    <td class="positive">90%</td>
+                    <td><span class="priority-badge priority-high">CRITICAL</span></td>
+                </tr>
+                <tr style="background: rgba(245, 158, 11, 0.08);">
+                    <td><strong>POPSTART PZ</strong></td>
+                    <td>$677K</td>
+                    <td>2.5%</td>
+                    <td class="neutral" style="text-align: center;">5</td>
+                    <td style="font-size: 10px;">Wood AG</td>
+                    <td>45%</td>
+                    <td><span class="priority-badge priority-medium">HIGH</span></td>
+                </tr>
+                <tr>
+                    <td><strong>PHOZGAURD 620</strong></td>
+                    <td>$2.14M</td>
+                    <td style="font-weight: 600;">8.0%</td>
+                    <td class="positive" style="text-align: center;">44</td>
+                    <td style="font-size: 10px;">Ace Ohlsson</td>
+                    <td>72%</td>
+                    <td><span class="priority-badge priority-low">LOW</span></td>
+                </tr>
+                <tr>
+                    <td><strong>ENVY</strong></td>
+                    <td>$1.02M</td>
+                    <td>3.8%</td>
+                    <td class="positive" style="text-align: center; font-weight: 600;">172</td>
+                    <td style="font-size: 10px;">Nutrien Australia</td>
+                    <td class="positive">98%</td>
+                    <td><span class="priority-badge priority-low">LOW</span></td>
+                </tr>
+                <tr>
+                    <td><strong>SOVEREIGN</strong></td>
+                    <td>$798K</td>
+                    <td>3.0%</td>
+                    <td class="positive" style="text-align: center;">59</td>
+                    <td style="font-size: 10px;">Nutrien Australia</td>
+                    <td class="positive">85%</td>
+                    <td><span class="priority-badge priority-low">LOW</span></td>
+                </tr>
+                <tr>
+                    <td><strong>CARBOCAL</strong></td>
+                    <td>$561K</td>
+                    <td>2.1%</td>
+                    <td class="positive" style="text-align: center;">33</td>
+                    <td style="font-size: 10px;">Ace Ohlsson</td>
+                    <td class="positive">100%</td>
+                    <td><span class="priority-badge priority-low">LOW</span></td>
+                </tr>
+                <tr style="background: rgba(100, 116, 139, 0.1); font-style: italic;">
+                    <td>Other Products</td>
+                    <td>$13.5M</td>
+                    <td>50.5%</td>
+                    <td style="text-align: center;">3,032</td>
+                    <td style="font-size: 10px;">Various</td>
+                    <td>67.5%</td>
+                    <td><span class="priority-badge priority-low">LOW</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="padding: 12px; background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; border-radius: 0 6px 6px 0; font-size: 11px;">
+                <strong style="color: #f87171;">🚨 Critical: $7.92M (29.6%) Single-Customer</strong>
+                <div style="color: #94a3b8; margin-top: 6px; line-height: 1.5;">
+                    4 products @ 1 customer each:<br>
+                    <span style="color: #ef4444;">Advanced Nutrients · Living Turf · Nutrien</span>
+                </div>
+            </div>
+            <div style="padding: 12px; background: rgba(34, 197, 94, 0.1); border-left: 3px solid #22c55e; border-radius: 0 6px 6px 0; font-size: 11px;">
+                <strong style="color: #4ade80;">✓ Best Practice: ENVY Model</strong>
+                <div style="color: #94a3b8; margin-top: 6px; line-height: 1.5;">
+                    172 customers · 4% top exposure · 98% margin<br>
+                    <strong style="color: #22c55e;">Target:</strong> Diversify KOMPLETE, MP ranges
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>Generated by RealShift Finance Dashboard | Data: Supabase (emgydkspmnaymxpdqpjr) | Last Updated: 27 Dec 2025</div>
+        <div>Sources: analysis.pl_statement_monthly, analysis.pl_variance_analysis, insights.cash_flow_forecast, insights.payment_performance, insights.collection_priorities, insights.finance_email_weekly, analysis.dormant_customers, analysis.product_concentration_risk, analysis.sales_performance_quarterly</div>
+    </div>
+
+    <script>
+        // Sparkline helper function with axis labels
+        function createSparkline(canvasId, data, color, labels, prefix) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels || data.map((_, i) => i),
+                    datasets: [{
+                        data: data,
+                        borderColor: color,
+                        borderWidth: 2,
+                        fill: true,
+                        backgroundColor: color + '20',
+                        tension: 0.4,
+                        pointRadius: 2,
+                        pointHoverRadius: 4,
+                        pointBackgroundColor: color
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            enabled: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return (prefix || '$') + context.raw + 'K';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            grid: { display: false },
+                            ticks: {
+                                color: '#64748b',
+                                font: { size: 9 },
+                                maxRotation: 0
+                            }
+                        },
+                        y: {
+                            display: true,
+                            position: 'right',
+                            grid: {
+                                display: true,
+                                color: 'rgba(71, 85, 105, 0.3)',
+                                lineWidth: 1,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#64748b',
+                                font: { size: 9 },
+                                callback: function(value) {
+                                    return (prefix || '$') + value + 'K';
+                                },
+                                maxTicksLimit: 4
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Month labels for sparklines (Jul-Nov 2025)
+        const sparklineMonths = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov'];
+
+        // Initialize sparklines with REAL Supabase data (Jul-Nov 2025)
+        createSparkline('sparkline-revenue', [509, 388, 521, 398, 397], '#22c55e', sparklineMonths, '$');
+        createSparkline('sparkline-gp', [322, 220, 300, 217, 211], '#3b82f6', sparklineMonths, '$');
+        createSparkline('sparkline-opex', [254, 201, 182, 217, 188], '#a855f7', sparklineMonths, '$');
+        createSparkline('sparkline-cash', [445, 480, 520, 540, 562], '#f59e0b', sparklineMonths, '$'); // AR trend
+
+        // Revenue Chart with REAL Supabase data + 3-Year Average
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        const budgetData = [554, 471, 508, 473, 425, 963, 719, 430, 383, 363, 401, 436]; // 2025 Final Budget
+        const actualData = [509, 388, 521, 398, 397, null, null, null, null, null, null, null]; // Real from Supabase
+        const avg3YrData = [441, 375, 436, 420, 441, 671, 555, 432, 245, 359, 267, 513]; // 3-year historical average
+
+        // Cumulative calculations
+        function cumulative(arr) {
+            let sum = 0;
+            return arr.map(v => sum += (v || 0));
+        }
+        const cumulativeBudget = cumulative(budgetData);
+        const cumulative3Yr = cumulative(avg3YrData);
+
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Budget',
+                    data: budgetData,
+                    backgroundColor: 'rgba(71, 85, 105, 0.35)',
+                    borderColor: '#475569',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    yAxisID: 'y',
+                    categoryPercentage: 0.7,
+                    barPercentage: 0.9
+                }, {
+                    label: 'Actual',
+                    data: actualData,
+                    backgroundColor: function(context) {
+                        const i = context.dataIndex;
+                        const actual = actualData[i];
+                        if (actual === null) return 'transparent';
+                        return actual >= budgetData[i] ? 'rgba(34, 197, 94, 0.85)' : 'rgba(239, 68, 68, 0.85)';
+                    },
+                    borderColor: function(context) {
+                        const i = context.dataIndex;
+                        const actual = actualData[i];
+                        if (actual === null) return 'transparent';
+                        return actual >= budgetData[i] ? '#22c55e' : '#ef4444';
+                    },
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    yAxisID: 'y',
+                    categoryPercentage: 0.7,
+                    barPercentage: 0.9
+                }, {
+                    label: '3yr Avg',
+                    data: avg3YrData,
+                    backgroundColor: 'rgba(120, 113, 108, 0.4)',
+                    borderColor: '#78716c',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    yAxisID: 'y',
+                    categoryPercentage: 0.7,
+                    barPercentage: 0.9
+                }, {
+                    label: 'Cumul. Budget',
+                    type: 'line',
+                    data: cumulativeBudget,
+                    borderColor: '#475569',
+                    borderWidth: 2,
+                    borderDash: [4, 4],
+                    fill: false,
+                    tension: 0.2,
+                    pointRadius: 0,
+                    yAxisID: 'y2'
+                }, {
+                    label: 'Cumul. 3yr',
+                    type: 'line',
+                    data: cumulative3Yr,
+                    borderColor: '#78716c',
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.2,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#78716c',
+                    yAxisID: 'y2'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: '#94a3b8',
+                            usePointStyle: true,
+                            padding: 12,
+                            font: { size: 10 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                if (value === null) return null;
+                                const millions = (value / 1000).toFixed(2);
+                                return `${context.dataset.label}: $${millions}M`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                        ticks: { color: '#94a3b8', font: { size: 10 } }
+                    },
+                    y: {
+                        position: 'left',
+                        title: { display: true, text: 'Monthly ($K)', color: '#64748b', font: { size: 10 } },
+                        grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                        ticks: {
+                            color: '#94a3b8',
+                            callback: value => '$' + value + 'K',
+                            font: { size: 10 }
+                        },
+                        max: 1100
+                    },
+                    y2: {
+                        position: 'right',
+                        title: { display: true, text: 'Cumulative ($M)', color: '#64748b', font: { size: 10 } },
+                        grid: { display: false },
+                        ticks: {
+                            color: '#78716c',
+                            callback: value => '$' + (value / 1000).toFixed(1) + 'M',
+                            font: { size: 10 }
+                        },
+                        min: 0
+                    }
+                }
+            },
+            plugins: [{
+                id: 'varianceLabels',
+                afterDatasetsDraw(chart) {
+                    const ctx = chart.ctx;
+                    const actualMeta = chart.getDatasetMeta(1); // Actual bars
+
+                    actualMeta.data.forEach((bar, i) => {
+                        if (actualData[i] !== null) {
+                            const vsBudget = ((actualData[i] - budgetData[i]) / budgetData[i] * 100).toFixed(0);
+                            ctx.font = 'bold 9px sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.fillStyle = vsBudget >= 0 ? '#22c55e' : '#ef4444';
+                            ctx.fillText(`${vsBudget >= 0 ? '+' : ''}${vsBudget}%`, bar.x, bar.y - 5);
+                        }
+                    });
+                }
+            }]
+        });
+
+        // Expense Horizontal Bar Chart - Operating Expenses Only (COGS shown separately above)
+        const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+        const expenseLabels = [
+            'Wages & Salaries',
+            'Rent & Utilities',
+            'Travel & Motor',
+            'Professional Fees',
+            'Super & Benefits',
+            'Insurance',
+            'Marketing & Events',
+            'Depreciation'
+        ];
+        const currentExpense = [195, 89, 67, 45, 42, 32, 28, 18]; // YTD actual (sorted by size)
+        const budgetExpense = [200, 95, 50, 40, 45, 30, 35, 20]; // YTD budget
+        const priorExpense = [185, 88, 55, 38, 40, 28, 30, 18]; // Prior year
+
+        new Chart(expenseCtx, {
+            type: 'bar',
+            data: {
+                labels: expenseLabels,
+                datasets: [{
+                    label: 'FY25 Actual',
+                    data: currentExpense,
+                    backgroundColor: function(context) {
+                        const idx = context.dataIndex;
+                        const actual = currentExpense[idx];
+                        const budget = budgetExpense[idx];
+                        if (actual > budget * 1.05) return 'rgba(239, 68, 68, 0.85)';
+                        if (actual < budget * 0.95) return 'rgba(34, 197, 94, 0.85)';
+                        return 'rgba(59, 130, 246, 0.85)';
+                    },
+                    borderRadius: 4,
+                    barThickness: 18
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const idx = context.dataIndex;
+                                const actual = currentExpense[idx];
+                                const budget = budgetExpense[idx];
+                                const variance = ((actual - budget) / budget * 100).toFixed(0);
+                                const prefix = variance > 0 ? '+' : '';
+                                return `$${actual}K (Budget: $${budget}K, ${prefix}${variance}%)`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(51, 65, 85, 0.3)' },
+                        ticks: {
+                            color: '#94a3b8',
+                            font: { size: 10 },
+                            callback: value => '$' + value + 'K'
+                        },
+                        max: 220
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#e2e8f0', font: { size: 11, weight: '500' } }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'budgetMarkerAndVariance',
+                afterDatasetsDraw(chart) {
+                    const ctx = chart.ctx;
+                    const meta = chart.getDatasetMeta(0);
+                    const xScale = chart.scales.x;
+
+                    meta.data.forEach((bar, i) => {
+                        // Draw budget marker line
+                        const budgetX = xScale.getPixelForValue(budgetExpense[i]);
+                        ctx.strokeStyle = '#f1f5f9';
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(budgetX, bar.y - 12);
+                        ctx.lineTo(budgetX, bar.y + 12);
+                        ctx.stroke();
+
+                        // Draw variance label at end of chart area
+                        const variance = ((currentExpense[i] - budgetExpense[i]) / budgetExpense[i] * 100).toFixed(0);
+                        const color = variance > 5 ? '#ef4444' : variance < -5 ? '#22c55e' : '#94a3b8';
+                        const prefix = variance > 0 ? '+' : '';
+                        ctx.fillStyle = color;
+                        ctx.font = 'bold 10px sans-serif';
+                        ctx.textAlign = 'right';
+                        ctx.fillText(`${prefix}${variance}%`, xScale.right - 5, bar.y + 4);
+                    });
+                }
+            }]
+        });
+
+        // AR Aging Doughnut Chart - REAL Supabase data from insights.cash_flow_forecast
+        const arAgingCtx = document.getElementById('arAgingChart').getContext('2d');
+        new Chart(arAgingCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Current', '1-30 Days', '31-60 Days', '61-90 Days', '90+ Days'],
+                datasets: [{
+                    data: [445295, 85574, 29380, 815, 963],
+                    backgroundColor: [
+                        'rgba(34, 197, 94, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(249, 115, 22, 0.8)',
+                        'rgba(239, 68, 68, 0.8)'
+                    ],
+                    borderColor: '#1e293b',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#94a3b8',
+                            usePointStyle: true,
+                            padding: 12,
+                            font: { size: 11 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = ((value / total) * 100).toFixed(1);
+                                return `$${(value/1000).toFixed(0)}K (${pct}%)`;
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'centerText',
+                beforeDraw(chart) {
+                    const ctx = chart.ctx;
+                    const width = chart.width;
+                    const height = chart.height;
+                    ctx.save();
+                    ctx.font = 'bold 20px sans-serif';
+                    ctx.fillStyle = '#e2e8f0';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('$562K', width / 2 - 40, height / 2 - 10);
+                    ctx.font = '11px sans-serif';
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.fillText('Total AR', width / 2 - 40, height / 2 + 12);
+                    ctx.restore();
+                }
+            }]
+        });
+    </script>
+</body>
+</html>
