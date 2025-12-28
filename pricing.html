@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | AgroBest Analytics Platform</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        /* Nav */
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+        .nav-logo { height: 32px; width: auto; }
+        .nav-title { font-size: 18px; font-weight: 700; color: #fff; }
+        .nav-subtitle { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-link { font-size: 13px; color: #94a3b8; text-decoration: none; }
+        .nav-link:hover { color: #fff; }
+        .nav-link.active { color: #3b82f6; }
+
+        /* Hero - Compact */
+        .hero { padding: 32px 0 20px; display: flex; align-items: center; justify-content: space-between; }
+        .hero-left h1 { font-size: 26px; font-weight: 700; color: #fff; }
+        .hero-left p { font-size: 13px; color: #64748b; margin-top: 4px; }
+        .valid-date { font-size: 11px; color: #64748b; background: rgba(51, 65, 85, 0.5); padding: 6px 14px; border-radius: 16px; white-space: nowrap; }
+
+        /* Section */
+        .section { padding: 24px 0; }
+        .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .section-title { font-size: 18px; font-weight: 600; color: #fff; }
+        .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, #334155, transparent); }
+
+        /* Pricing Grid - 3 columns */
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .pricing-card { background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; border-radius: 16px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+        .pricing-card:hover { border-color: #475569; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .pricing-card.hubspot { border-top: 3px solid #a855f7; }
+        .pricing-card.finance-card { border-top: 3px solid #22c55e; }
+        .pricing-card.foresight-card { border-top: 3px solid #3b82f6; }
+        .card-header { padding: 20px 20px 14px; border-bottom: 1px solid #334155; }
+        .card-header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .card-icon.sync { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); }
+        .card-icon.finance { background: rgba(34, 197, 94, 0.15); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .card-icon.foresight { background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge { font-size: 9px; font-weight: 600; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; background: rgba(59, 130, 246, 0.2); color: #60a5fa; letter-spacing: 0.5px; }
+        .card-title { font-size: 17px; font-weight: 600; color: #fff; }
+        .card-subtitle { font-size: 12px; color: #64748b; margin-top: 2px; }
+        .card-body { padding: 16px 20px; }
+
+        /* Tier rows */
+        .tier-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(51, 65, 85, 0.4); }
+        .tier-row:last-child { border-bottom: none; }
+        .tier-info { flex: 1; }
+        .tier-name { font-size: 14px; font-weight: 600; color: #fff; }
+        .tier-name.addon { color: #94a3b8; font-size: 13px; }
+        .tier-desc { font-size: 11px; color: #64748b; margin-top: 3px; }
+        .tier-prices { text-align: right; }
+        .price-upfront { font-size: 15px; font-weight: 700; color: #22c55e; }
+        .price-monthly { font-size: 12px; color: #60a5fa; margin-top: 2px; }
+
+        /* Summary compact */
+        .summary { background: rgba(30, 41, 59, 0.6); border-radius: 8px; padding: 10px 12px; margin-top: 12px; }
+        .summary-row { display: flex; justify-content: space-between; font-size: 12px; padding: 4px 0; }
+        .summary-label { color: #94a3b8; }
+        .summary-value { font-weight: 600; color: #22c55e; }
+        .summary-value span { color: #3b82f6; }
+
+        /* Bundle Matrix */
+        .bundle-matrix { width: 100%; border-collapse: separate; border-spacing: 0; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); border-radius: 16px; overflow: hidden; border: 1px solid #334155; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+        .bundle-matrix th { padding: 16px 12px; background: linear-gradient(180deg, #1e293b 0%, #172033 100%); font-weight: 600; color: #94a3b8; border-bottom: 2px solid #334155; font-size: 11px; text-align: center; vertical-align: bottom; line-height: 1.4; }
+        .bundle-matrix th:first-child { text-align: left; padding-left: 20px; color: #fff; font-size: 13px; width: 180px; }
+        .bundle-matrix th:last-child { padding-right: 20px; }
+        .bundle-matrix th .feature-icon { display: block; margin: 0 auto 8px; opacity: 0.9; }
+        .bundle-matrix td { padding: 16px 12px; border-bottom: 1px solid rgba(51, 65, 85, 0.5); text-align: center; font-size: 14px; transition: background 0.2s; }
+        .bundle-matrix td:first-child { text-align: left; padding-left: 20px; font-weight: 500; color: #fff; font-size: 14px; }
+        .bundle-matrix tr:last-child td { border-bottom: none; }
+        .bundle-matrix tbody tr:hover:not(.section-row) { background: rgba(59, 130, 246, 0.08); }
+        .bundle-matrix tr.recommended { background: linear-gradient(90deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05)); }
+        .bundle-matrix tr.recommended:hover { background: linear-gradient(90deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.08)); }
+        .bundle-matrix tr.recommended td:first-child::after { content: ' ★'; color: #22c55e; font-size: 11px; }
+        .bundle-matrix tr.section-row td { background: linear-gradient(90deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4)); font-size: 12px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; padding: 12px 20px; border-bottom: 1px solid #334155; border-top: 1px solid #334155; }
+        .bundle-matrix .tick { color: #22c55e; font-size: 18px; font-weight: 700; text-shadow: 0 0 8px rgba(34, 197, 94, 0.3); }
+        .bundle-matrix .dash { color: #475569; font-size: 16px; }
+        .bundle-matrix .price-cell { text-align: right; padding-right: 20px; }
+        .bundle-matrix .price-upfront { font-weight: 700; color: #22c55e; font-size: 16px; }
+        .bundle-matrix .price-monthly { color: #60a5fa; font-size: 12px; margin-top: 2px; }
+
+        /* Comparison - compact */
+        .comparison-table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 12px; overflow: hidden; border: 1px solid #334155; font-size: 13px; }
+        .comparison-table th { text-align: left; padding: 12px 16px; background: rgba(30, 41, 59, 0.8); font-weight: 600; color: #fff; border-bottom: 1px solid #334155; }
+        .comparison-table td { padding: 10px 16px; border-bottom: 1px solid rgba(51, 65, 85, 0.4); }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table td:first-child { color: #94a3b8; }
+        .comparison-table .competitor { color: #64748b; }
+        .comparison-table .us { color: #22c55e; font-weight: 500; }
+
+        /* Terms - inline */
+        .terms-row { display: flex; gap: 24px; padding: 20px 0; border-top: 1px solid rgba(51, 65, 85, 0.5); }
+        .term-item { flex: 1; display: flex; align-items: center; gap: 12px; }
+        .term-icon { font-size: 20px; }
+        .term-text .term-title { font-size: 13px; font-weight: 600; color: #fff; }
+        .term-text .term-desc { font-size: 11px; color: #94a3b8; }
+
+        /* CTA compact */
+        .cta-section { padding: 32px 0; text-align: center; }
+        .cta-box { background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 16px; padding: 32px; }
+        .cta-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .cta-desc { font-size: 14px; color: #94a3b8; margin-bottom: 16px; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+        .cta-button:hover { box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3); }
+
+        /* Footer */
+        .footer { border-top: 1px solid rgba(51, 65, 85, 0.5); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+        .footer-brand { display: flex; align-items: center; gap: 12px; }
+        .footer-logo { font-weight: 700; color: #fff; }
+        .footer-tagline { color: #64748b; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-link { color: #94a3b8; text-decoration: none; }
+        .footer-link:hover { color: #3b82f6; }
+
+        @media (max-width: 900px) { .pricing-grid, .bundles-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .pricing-grid, .bundles-grid { grid-template-columns: 1fr; } .terms-row { flex-direction: column; gap: 16px; } }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="container">
+        <nav class="nav">
+            <a href="index.html" class="nav-brand">
+                <img src="agrobest-logo.png" alt="AgroBest" class="nav-logo">
+                <div>
+                    <div class="nav-title">AgroBest</div>
+                    <div class="nav-subtitle">Analytics Platform</div>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Dashboards</a>
+                <a href="pricing.html" class="nav-link active">Pricing</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-left">
+                <h1>Pricing & Packages</h1>
+                <p>Modular pricing that scales with your needs</p>
+            </div>
+            <div class="valid-date">Valid until 31 Jan 2025</div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Products</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- HubSpot Sync - FIRST -->
+                <div class="pricing-card hubspot">
+                    <div class="card-header">
+                        <div class="card-header-top">
+                            <div class="card-icon sync">&#8644;</div>
+                            <span class="badge">Core</span>
+                        </div>
+                        <div class="card-title">HubSpot &#8596; Exo Sync</div>
+                        <div class="card-subtitle">Bidirectional CRM/ERP Integration</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tier-row">
+                            <div class="tier-info">
+                                <div class="tier-name">CRM ↔ ERP Sync</div>
+                                <div class="tier-desc">Deals, customers, orders, credit limits</div>
+                            </div>
+                            <div class="tier-prices">
+                                <div class="price-upfront">$2,000</div>
+                                <div class="price-monthly">$150/mo</div>
+                            </div>
+                        </div>
+                        <div class="summary">
+                            <div style="font-size: 11px; color: #94a3b8; line-height: 1.7;">
+                                &#10003; No double-entry &nbsp; &#10003; Credit in CRM<br>
+                                &#10003; Order history &nbsp; &#10003; Deal → Quote
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Finance Dashboard -->
+                <div class="pricing-card finance-card">
+                    <div class="card-header">
+                        <div class="card-header-top">
+                            <div class="card-icon finance">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-title">Finance Dashboard</div>
+                        <div class="card-subtitle">Financial Performance & Analysis</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tier-row">
+                            <div class="tier-info">
+                                <div class="tier-name">Base</div>
+                                <div class="tier-desc">KPIs, P&L, AR, Budget vs Actual</div>
+                            </div>
+                            <div class="tier-prices">
+                                <div class="price-upfront">$2,000</div>
+                                <div class="price-monthly">$50/mo</div>
+                            </div>
+                        </div>
+                        <div class="tier-row">
+                            <div class="tier-info">
+                                <div class="tier-name addon">+ Finance AI</div>
+                                <div class="tier-desc">Live alerts, CFO Priority Matrix</div>
+                            </div>
+                            <div class="tier-prices">
+                                <div class="price-upfront">+$1,500</div>
+                                <div class="price-monthly">+$149/mo</div>
+                            </div>
+                        </div>
+                        <div class="summary">
+                            <div class="summary-row">
+                                <span class="summary-label">Base</span>
+                                <span class="summary-value">$2K <span>+$50</span></span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">+ AI</span>
+                                <span class="summary-value">$3.5K <span>+$199</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foresight Dashboard -->
+                <div class="pricing-card foresight-card">
+                    <div class="card-header">
+                        <div class="card-header-top">
+                            <div class="card-icon foresight">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                                </svg>
+                            </div>
+                            <span class="badge">Flexible</span>
+                        </div>
+                        <div class="card-title">Foresight Dashboard</div>
+                        <div class="card-subtitle">Market Intelligence & Opportunities</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tier-row">
+                            <div class="tier-info">
+                                <div class="tier-name">Base</div>
+                                <div class="tier-desc">Crop calendar, Product matrix, Map</div>
+                            </div>
+                            <div class="tier-prices">
+                                <div class="price-upfront">$2,000</div>
+                                <div class="price-monthly">$50/mo</div>
+                            </div>
+                        </div>
+                        <div class="tier-row">
+                            <div class="tier-info">
+                                <div class="tier-name addon">+ Market Intel</div>
+                                <div class="tier-desc">Commodity prices, Weather/ENSO</div>
+                            </div>
+                            <div class="tier-prices">
+                                <div class="price-upfront">+$1,000</div>
+                                <div class="price-monthly">+$99/mo</div>
+                            </div>
+                        </div>
+                        <div class="tier-row">
+                            <div class="tier-info">
+                                <div class="tier-name addon">+ Sales Intel</div>
+                                <div class="tier-desc">Live actions, Pipeline, Opportunities</div>
+                            </div>
+                            <div class="tier-prices">
+                                <div class="price-upfront">+$1,000</div>
+                                <div class="price-monthly">+$99/mo</div>
+                            </div>
+                        </div>
+                        <div class="summary">
+                            <div class="summary-row">
+                                <span class="summary-label">Base</span>
+                                <span class="summary-value">$2K <span>+$50</span></span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">+ All Intel</span>
+                                <span class="summary-value">$4K <span>+$248</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">All Packages</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <table class="bundle-matrix">
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>
+                            <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/><path d="M10 7h4M7 10v4M17 10v4M10 17h4"/></svg>
+                            HubSpot<br>Sync
+                        </th>
+                        <th>
+                            <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            Finance<br>Base
+                        </th>
+                        <th>
+                            <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/><circle cx="17" cy="17" r="3" fill="#4ade80"/></svg>
+                            Finance<br>AI
+                        </th>
+                        <th>
+                            <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                            Foresight<br>Base
+                        </th>
+                        <th>
+                            <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-3 3"/></svg>
+                            Market<br>Intel
+                        </th>
+                        <th>
+                            <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#93c5fd" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            Sales<br>Intel
+                        </th>
+                        <th class="price-cell">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Standalone Products -->
+                    <tr class="section-row"><td colspan="8">Standalone Products</td></tr>
+                    <tr>
+                        <td>HubSpot ↔ Exo Sync</td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td class="price-cell"><div class="price-upfront">$2,000</div><div class="price-monthly">$150/mo</div></td>
+                    </tr>
+                    <tr>
+                        <td>Finance Base</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td class="price-cell"><div class="price-upfront">$2,000</div><div class="price-monthly">$50/mo</div></td>
+                    </tr>
+                    <tr>
+                        <td>Finance + AI</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td class="price-cell"><div class="price-upfront">$3,500</div><div class="price-monthly">$199/mo</div></td>
+                    </tr>
+                    <tr>
+                        <td>Foresight Base</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td class="price-cell"><div class="price-upfront">$2,000</div><div class="price-monthly">$50/mo</div></td>
+                    </tr>
+                    <tr>
+                        <td>Foresight + Market</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td class="price-cell"><div class="price-upfront">$3,000</div><div class="price-monthly">$149/mo</div></td>
+                    </tr>
+                    <tr>
+                        <td>Foresight + All Intel</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td class="price-cell"><div class="price-upfront">$4,000</div><div class="price-monthly">$248/mo</div></td>
+                    </tr>
+                    <!-- Bundles -->
+                    <tr class="section-row"><td colspan="8">Bundles <span style="font-weight: 400; color: #64748b;">— Save $500 on base</span></td></tr>
+                    <tr>
+                        <td>Both Dashboards</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td class="price-cell"><div class="price-upfront">$3,500</div><div class="price-monthly">$100/mo</div></td>
+                    </tr>
+                    <tr>
+                        <td>Both + Finance AI</td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td class="price-cell"><div class="price-upfront">$5,000</div><div class="price-monthly">$249/mo</div></td>
+                    </tr>
+                    <tr class="recommended">
+                        <td>Both + HubSpot</td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td><span class="dash">—</span></td>
+                        <td class="price-cell"><div class="price-upfront">$5,000</div><div class="price-monthly">$250/mo</div></td>
+                    </tr>
+                    <tr>
+                        <td>Full Stack</td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td><span class="tick">✓</span></td>
+                        <td class="price-cell"><div class="price-upfront">$9,000</div><div class="price-monthly">$596/mo</div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-brand">
+                <span class="footer-logo">RealShift</span>
+                <span class="footer-tagline">Automation & Analytics for Australian Agriculture</span>
+            </div>
+            <div class="footer-links">
+                <a href="mailto:cal@realshift.ai" class="footer-link">cal@realshift.ai</a>
+                <a href="https://realshift.com.au" class="footer-link">realshift.com.au</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
