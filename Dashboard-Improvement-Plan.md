@@ -246,10 +246,10 @@ Legend: ██ Peak (>15%) | █░ Active (8-15%) | ░░ Low (<8%)
 | Cotton | Nov-Mar | EC KOMPLETE, KOMPLETE, AGRODEX K | Irrigated - stable |
 | Cereals (Wheat/Barley) | Apr-Jun (sowing) | PHOZSTART, POPSTART | Autumn break >25mm |
 | Cereals (Wheat/Barley) | Sep-Nov (spring) | POPSTART PZ, foliars | Spring break |
-| Turf | Year-round | MP BRILLIANCE, GREEN BLAST, SILICA | Heat = stress products |
+| Turf | Year-round | MP BRILLIANCE, GREEN BLAST, ENVY | Heat = stress products |
 | Chickpea | Jun-Aug | CHICKPEA specialty | Dry season NT |
 | Avocado | Year-round | CARBOCAL, K products | Fruit development |
-| Sugarcane | Oct-Apr | SILICA, N+K blends | Wet season |
+| Sugarcane | Oct-Apr | N+K blends, CARBOCAL | Wet season |
 
 #### 4.4 Monthly Action Matrix
 ```
@@ -467,7 +467,7 @@ const layers = {
 ├────────────────────────────────────────────────────────────────┤
 │ PHOZSTART               POPSTART PZ            Same application│
 │ EC KOMPLETE             AGRODEX K45            Boll fill combo │
-│ ENVY                    SILICA                 Stress stack    │
+│ ENVY                    CARBOCAL               Stress stack    │
 │ MP BRILLIANCE           GREEN BLAST            Turf system     │
 │ PHOZGUARD               SPRAYTECH OIL          Tank mix        │
 │ CARBOCAL                K products             Hort nutrition  │
