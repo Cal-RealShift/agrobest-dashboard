@@ -955,6 +955,21 @@
             color: #fcd34d;
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.12);
         }
+
+        /* Tier Badges */
+        .tier-badge {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 6px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+        .tier-base { background: rgba(100, 116, 139, 0.25); color: #94a3b8; }
+        .tier-market { background: rgba(59, 130, 246, 0.25); color: #60a5fa; }
+        .tier-sales { background: rgba(34, 197, 94, 0.25); color: #4ade80; }
     </style>
 </head>
 <body>
@@ -975,12 +990,12 @@
     <!-- Tab Navigation -->
     <div class="tabs">
         <button class="tab-btn active" onclick="showTab('dashboard')">Dashboard</button>
-        <button class="tab-btn" onclick="showTab('actions')">Customer Actions</button>
-        <button class="tab-btn" onclick="showTab('opportunities')">Opportunities</button>
+        <button class="tab-btn" onclick="showTab('actions')">Customer Actions <span class="tier-badge tier-sales">SI</span></button>
+        <button class="tab-btn" onclick="showTab('opportunities')">Opportunities <span class="tier-badge tier-sales">SI</span></button>
         <button class="tab-btn" onclick="showTab('calendar')">Crop Calendar</button>
-        <button class="tab-btn" onclick="showTab('products')">Products</button>
-        <button class="tab-btn" onclick="showTab('market')">Market Intel</button>
-        <button class="tab-btn" onclick="showTab('map')">Customer Map</button>
+        <button class="tab-btn" onclick="showTab('products')">Products <span class="tier-badge tier-base">Base</span></button>
+        <button class="tab-btn" onclick="showTab('market')">Market Intel <span class="tier-badge tier-market">MI</span></button>
+        <button class="tab-btn" onclick="showTab('map')">Customer Map <span class="tier-badge tier-base">Base</span></button>
     </div>
 
     <div class="content">
@@ -990,32 +1005,32 @@
             <div class="workflow-grid">
                 <div class="workflow-card">
                     <div class="workflow-dot active"></div>
-                    <div class="workflow-name">WF1: Prices</div>
+                    <div class="workflow-name">WF1: Prices <span class="tier-badge tier-market">MI</span></div>
                     <div class="workflow-meta">6am | 4 feeds</div>
                 </div>
                 <div class="workflow-card">
                     <div class="workflow-dot active"></div>
-                    <div class="workflow-name">WF2: Weather</div>
+                    <div class="workflow-name">WF2: Weather <span class="tier-badge tier-market">MI</span></div>
                     <div class="workflow-meta">Mon | BOM+ENSO</div>
                 </div>
                 <div class="workflow-card">
                     <div class="workflow-dot active"></div>
-                    <div class="workflow-name">WF3: Actions</div>
+                    <div class="workflow-name">WF3: Actions <span class="tier-badge tier-sales">SI</span></div>
                     <div class="workflow-meta">6am | 27 gen</div>
                 </div>
                 <div class="workflow-card">
                     <div class="workflow-dot pending"></div>
-                    <div class="workflow-name">WF4: Email</div>
+                    <div class="workflow-name">WF4: Email <span class="tier-badge tier-sales">SI</span></div>
                     <div class="workflow-meta">30 Dec 7am</div>
                 </div>
                 <div class="workflow-card">
                     <div class="workflow-dot active"></div>
-                    <div class="workflow-name">WF5: AR Sync</div>
+                    <div class="workflow-name">WF5: AR Sync <span class="tier-badge tier-base">Base</span></div>
                     <div class="workflow-meta">Hourly | MYOB</div>
                 </div>
                 <div class="workflow-card">
                     <div class="workflow-dot active"></div>
-                    <div class="workflow-name">WF6: CRM</div>
+                    <div class="workflow-name">WF6: CRM <span class="tier-badge tier-sales">SI</span></div>
                     <div class="workflow-meta">15min | HubSpot</div>
                 </div>
             </div>
@@ -1027,7 +1042,7 @@
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div style="width: 12px; height: 12px; background: #06b6d4; border-radius: 50%; animation: pulse 2s infinite;"></div>
                         <div>
-                            <div style="font-size: 11px; color: #94a3b8;">ENSO STATUS</div>
+                            <div style="font-size: 11px; color: #94a3b8;">ENSO STATUS <span class="tier-badge tier-market">MI</span></div>
                             <div style="font-size: 14px; font-weight: 600; color: #06b6d4;">LA NINA (Weak)</div>
                         </div>
                         <div style="margin-left: auto; text-align: right;">
@@ -1042,7 +1057,7 @@
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div style="width: 12px; height: 12px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite;"></div>
                         <div>
-                            <div style="font-size: 11px; color: #94a3b8;">TODAY'S ORDERS</div>
+                            <div style="font-size: 11px; color: #94a3b8;">TODAY'S ORDERS <span class="tier-badge tier-sales">SI</span></div>
                             <div style="font-size: 14px; font-weight: 600; color: #22c55e;">$12,450</div>
                         </div>
                         <div style="margin-left: auto; text-align: right;">
@@ -1057,7 +1072,7 @@
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div style="width: 12px; height: 12px; background: #f59e0b; border-radius: 50%; animation: pulse 2s infinite;"></div>
                         <div>
-                            <div style="font-size: 11px; color: #94a3b8;">WEATHER ALERT</div>
+                            <div style="font-size: 11px; color: #94a3b8;">WEATHER ALERT <span class="tier-badge tier-market">MI</span></div>
                             <div style="font-size: 14px; font-weight: 600; color: #f59e0b;">Heat Wave - Sydney</div>
                         </div>
                         <div style="margin-left: auto; text-align: right;">
@@ -1072,7 +1087,7 @@
             <!-- KPI Row with Sparklines -->
             <div class="grid grid-4" style="margin-bottom: 20px;">
                 <div class="card" style="position: relative;">
-                    <div class="card-title">December 2025 Sales</div>
+                    <div class="card-title">December 2025 Sales <span class="tier-badge tier-base">Base</span></div>
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="card-value negative">$17K</div>
                         <span style="font-size: 20px; color: #ef4444;">↓</span>
@@ -1083,7 +1098,7 @@
                     <div style="height: 100px; margin: 8px 0;"><canvas id="sparkline-dec"></canvas></div>
                 </div>
                 <div class="card" style="position: relative;">
-                    <div class="card-title">YTD Revenue 2025</div>
+                    <div class="card-title">YTD Revenue 2025 <span class="tier-badge tier-base">Base</span></div>
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="card-value">$4.24M</div>
                         <span style="font-size: 20px; color: #f59e0b;">↓</span>
@@ -1092,7 +1107,7 @@
                     <div style="height: 100px; margin: 8px 0;"><canvas id="sparkline-ytd"></canvas></div>
                 </div>
                 <div class="card" style="position: relative;">
-                    <div class="card-title">Outstanding AR</div>
+                    <div class="card-title">Outstanding AR <span class="tier-badge tier-base">Base</span></div>
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="card-value warning">$499K</div>
                         <span style="font-size: 20px; color: #f59e0b;">↑</span>
@@ -1101,7 +1116,7 @@
                     <div style="height: 100px; margin: 8px 0;"><canvas id="sparkline-ar"></canvas></div>
                 </div>
                 <div class="card" style="position: relative;">
-                    <div class="card-title">Actions Generated</div>
+                    <div class="card-title">Actions Generated <span class="tier-badge tier-sales">SI</span></div>
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="card-value positive">27</div>
                         <div style="display: flex; flex-direction: column; gap: 2px;">
@@ -1142,6 +1157,7 @@
                         <div class="section-header">
                             <div class="section-title">Commodity Prices → Sales Impact (WF1)</div>
                             <div style="display: flex; gap: 6px; align-items: center;">
+                                <span class="tier-badge tier-market">MI</span>
                                 <span class="badge badge-green">6am AEST</span>
                                 <span style="font-size: 9px; color: #64748b;">ICE + ABARES</span>
                             </div>
@@ -1226,7 +1242,7 @@
                     <!-- Top Actions -->
                     <div class="card">
                         <div class="section-header">
-                            <div class="section-title">Priority Actions Today (Top 15)</div>
+                            <div class="section-title">Priority Actions Today (Top 15) <span class="tier-badge tier-sales">SI</span></div>
                             <div style="display: flex; gap: 8px; align-items: center;">
                                 <span class="badge badge-red">$2.8M at risk</span>
                                 <span class="badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 9px;">3 CRITICAL</span>
@@ -2057,7 +2073,7 @@
                 <div style="flex: 1; min-width: 140px; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%); border-radius: 16px; padding: 18px 20px; border: 1px solid #334155;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <div style="font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">Total</div>
+                            <div style="font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">Total <span class="tier-badge tier-sales">SI</span></div>
                             <div style="font-size: 32px; font-weight: 700; color: #e2e8f0; line-height: 1.1;">27</div>
                         </div>
                         <div style="font-size: 10px; color: #64748b; text-align: right;">
@@ -2108,7 +2124,7 @@
             <div class="card" style="margin-bottom: 20px; padding: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
                     <div>
-                        <div style="font-size: 13px; font-weight: 600; color: #e2e8f0;">December Action Progress</div>
+                        <div style="font-size: 13px; font-weight: 600; color: #e2e8f0;">December Action Progress <span class="tier-badge tier-sales">SI</span></div>
                         <div style="font-size: 14px; color: #64748b;">3 days remaining this month</div>
                     </div>
                     <div style="text-align: right;">
@@ -2191,7 +2207,7 @@
             <!-- Full Action Queue (27 Actions) -->
                     <div class="card" style="margin-bottom: 20px;">
                         <div class="section-header">
-                            <div class="section-title">Full Action Queue</div>
+                            <div class="section-title">Full Action Queue <span class="tier-badge tier-sales">SI</span></div>
                             <div style="display: flex; gap: 6px; align-items: center;">
                                 <div class="section-badge alert">$2.38M Total</div>
                                 <span style="font-size: 8px; padding: 2px 5px; background: rgba(59,130,246,0.2); color: #3b82f6; border-radius: 4px;">WF3 Generated</span>
@@ -3294,7 +3310,7 @@
         <div id="market" class="tab-content">
             <!-- Commodity Prices -->
             <div class="section-header">
-                <div class="section-title">Commodity Prices (WF1: Daily 6am)</div>
+                <div class="section-title">Commodity Prices (WF1: Daily 6am) <span class="tier-badge tier-market">MI</span></div>
                 <span class="badge badge-green">Updated 26 Dec 6:00am</span>
             </div>
             <div class="commodity-grid" style="margin-bottom: 24px;">
@@ -3915,7 +3931,7 @@
 
             <!-- Weather Intelligence -->
             <div class="section-header">
-                <div class="section-title">Weather Intelligence (WF2: Weekly Monday)</div>
+                <div class="section-title">Weather Intelligence (WF2: Weekly Monday) <span class="tier-badge tier-market">MI</span></div>
                 <span class="badge badge-green">Updated 23 Dec</span>
             </div>
             <div class="weather-grid">

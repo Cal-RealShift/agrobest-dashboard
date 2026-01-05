@@ -285,6 +285,21 @@
         /* Grid 5 for KPIs */
         .grid-5 { grid-template-columns: repeat(5, 1fr); }
 
+        /* Tier Badges */
+        .tier-badge {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 8px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+        .tier-base { background: rgba(100, 116, 139, 0.25); color: #94a3b8; }
+        .tier-ai { background: rgba(168, 85, 247, 0.25); color: #c084fc; }
+        .card-header-right { display: flex; align-items: center; gap: 8px; }
+
         /* Mobile responsive */
         @media (max-width: 1400px) {
             .grid-5 { grid-template-columns: repeat(3, 1fr); }
@@ -338,7 +353,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">YTD Revenue</div>
-                <div class="kpi-icon kpi-revenue">$</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-base">Base</span>
+                    <div class="kpi-icon kpi-revenue">$</div>
+                </div>
             </div>
             <div class="card-value">$2.23M</div>
             <div class="card-change positive">▲ 12.4% vs prior year</div>
@@ -352,7 +370,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">Gross Profit</div>
-                <div class="kpi-icon kpi-profit">%</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-base">Base</span>
+                    <div class="kpi-icon kpi-profit">%</div>
+                </div>
             </div>
             <div class="card-value">$1.29M</div>
             <div class="card-change positive">▲ 64.3% margin</div>
@@ -366,7 +387,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">Operating Expenses</div>
-                <div class="kpi-icon kpi-margin">−</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-base">Base</span>
+                    <div class="kpi-icon kpi-margin">−</div>
+                </div>
             </div>
             <div class="card-value">$1.06M</div>
             <div class="card-change neutral">◆ 47% of revenue</div>
@@ -380,7 +404,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">Accounts Receivable</div>
-                <div class="kpi-icon kpi-cash">$</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-base">Base</span>
+                    <div class="kpi-icon kpi-cash">$</div>
+                </div>
             </div>
             <div class="card-value">$562K</div>
             <div class="card-change neutral">◆ 97 invoices outstanding</div>
@@ -397,8 +424,11 @@
     <div class="grid grid-5" style="margin-bottom: 20px;">
         <div class="card kpi-mini">
             <div class="card-header">
-                <div class="card-title">DSO (Days Sales Outstanding)</div>
-                <div class="kpi-icon kpi-quick">⏱</div>
+                <div class="card-title">DSO</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-ai">AI</span>
+                    <div class="kpi-icon kpi-quick">⏱</div>
+                </div>
             </div>
             <div class="card-value severity-good">8 days</div>
             <div class="card-change positive">▲ Excellent - Industry avg: 45 days</div>
@@ -415,7 +445,10 @@
         <div class="card kpi-mini">
             <div class="card-header">
                 <div class="card-title">Bad Debt Exposure</div>
-                <div class="kpi-icon kpi-bad-debt">⚠</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-ai">AI</span>
+                    <div class="kpi-icon kpi-bad-debt">⚠</div>
+                </div>
             </div>
             <div class="card-value severity-warning">$25.9K</div>
             <div class="card-change neutral">◆ 4.6% of total AR</div>
@@ -432,7 +465,10 @@
         <div class="card kpi-mini">
             <div class="card-header">
                 <div class="card-title">Expected Collections</div>
-                <div class="kpi-icon kpi-collection">💰</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-ai">AI</span>
+                    <div class="kpi-icon kpi-collection">💰</div>
+                </div>
             </div>
             <div class="card-value severity-good">$536K</div>
             <div class="card-change positive">▲ 95.4% collection rate</div>
@@ -449,7 +485,10 @@
         <div class="card kpi-mini">
             <div class="card-header">
                 <div class="card-title">Credit Breaches</div>
-                <div class="kpi-icon kpi-dso">🚫</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-ai">AI</span>
+                    <div class="kpi-icon kpi-dso">🚫</div>
+                </div>
             </div>
             <div class="card-value severity-critical">12 accounts</div>
             <div class="card-change negative">▼ $492K over limits</div>
@@ -465,8 +504,11 @@
 
         <div class="card kpi-mini">
             <div class="card-header">
-                <div class="card-title">YoY Revenue Change</div>
-                <div class="kpi-icon kpi-bad-debt">📉</div>
+                <div class="card-title">YoY Change</div>
+                <div class="card-header-right">
+                    <span class="tier-badge tier-ai">AI</span>
+                    <div class="kpi-icon kpi-bad-debt">📉</div>
+                </div>
             </div>
             <div class="card-value severity-critical">-53%</div>
             <div class="card-change negative">▼ Q4'25 vs Q4'24</div>
@@ -485,7 +527,7 @@
     <div class="grid grid-3" style="margin-bottom: 20px;">
         <div class="card">
             <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
-                <span>Monthly Revenue: Budget vs Actual (FY25 YTD)</span>
+                <span>Monthly Revenue: Budget vs Actual (FY25 YTD) <span class="tier-badge tier-base">Base</span></span>
                 <div style="display: flex; gap: 12px; font-size: 10px;">
                     <span style="color: #22c55e;">YTD: $2.21M</span>
                     <span style="color: #475569;">Budget: $6.13M</span>
@@ -522,6 +564,7 @@
         <div class="ai-panel" style="height: 100%; max-height: 520px; overflow-y: auto;">
             <div class="ai-header">
                 <div class="ai-badge">AI INSIGHTS</div>
+                <span class="tier-badge tier-ai">AI</span>
                 <div class="ai-title">Financial Analysis</div>
                 <div style="margin-left: auto; font-size: 10px; color: #64748b;">Live from Supabase · 27 Dec 2025</div>
             </div>
@@ -611,7 +654,7 @@
     <div class="grid grid-2">
         <div class="card">
             <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
-                <span>Expense Breakdown by Category</span>
+                <span>Expense Breakdown by Category <span class="tier-badge tier-base">Base</span></span>
                 <div style="font-size: 11px; color: #64748b;">YTD Total: $1.46M | Budget: $1.40M | <span style="color: #ef4444;">+4.3%</span></div>
             </div>
 
@@ -673,7 +716,7 @@
         </div>
 
         <div class="card">
-            <div class="card-title">Monthly P&L Summary <span style="font-size: 11px; color: #64748b;">(Live from Supabase)</span></div>
+            <div class="card-title">Monthly P&L Summary <span class="tier-badge tier-base">Base</span> <span style="font-size: 11px; color: #64748b;">(Live from Supabase)</span></div>
             <div style="overflow-x: auto;">
             <table class="table">
                 <thead>
