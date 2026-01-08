@@ -993,6 +993,7 @@
         <a href="Dashboard-1-Executive-Finance.html" class="nav-link">FINANCE</a>
         <a href="Dashboard-2-Sales-Actions.html" class="nav-link active">FORESIGHT</a>
         <a href="pricing.html" class="nav-link">PRICING</a>
+        <a href="Admin-Auto-Pricing.html" class="nav-link">ADMIN</a>
     </nav>
 
     <!-- Tab Navigation -->
@@ -1160,90 +1161,242 @@
             <!-- Main Grid -->
             <div class="grid grid-sidebar">
                 <div>
-                    <!-- Commodity Prices with Sales Context -->
+                    <!-- Grower Margin Outlook - Simplified -->
                     <div class="card" style="margin-bottom: 20px;">
                         <div class="section-header">
-                            <div class="section-title">Commodity Prices → Sales Impact (WF1)</div>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="section-title">Grower Margin Outlook</div>
+                                <div style="display: flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(239, 68, 68, 0.15); border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                                    <span style="font-size: 10px; color: #ef4444; font-weight: 600;">Input Costs +16%</span>
+                                    <span style="font-size: 9px; color: #94a3b8;">YoY</span>
+                                </div>
+                            </div>
                             <div style="display: flex; gap: 6px; align-items: center;">
                                 <span class="tier-badge tier-market">MI</span>
                                 <span class="badge badge-green">6am AEST</span>
-                                <span style="font-size: 9px; color: #64748b;">ICE + ABARES</span>
                             </div>
                         </div>
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                            <!-- Cotton -->
-                            <div style="padding: 12px; background: rgba(34, 197, 94, 0.08); border-radius: 8px; border-left: 3px solid #22c55e;">
-                                <div style="display: flex; justify-content: space-between; align-items: start;">
-                                    <div>
-                                        <div style="font-size: 10px; color: #94a3b8;">COTTON</div>
-                                        <div style="font-size: 22px; font-weight: 700; color: #22c55e;">$580<span style="font-size: 11px; color: #64748b;">/bale</span></div>
-                                    </div>
+
+                        <!-- Compact 4-column grid -->
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+
+                            <!-- COTTON -->
+                            <div style="padding: 14px; background: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.04) 100%); border-radius: 10px; border: 1px solid rgba(245, 158, 11, 0.25);">
+                                <!-- Signal Badge -->
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="font-size: 11px; font-weight: 600; color: #e2e8f0; letter-spacing: 0.5px;">COTTON</span>
+                                    <span style="font-size: 9px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.2); padding: 2px 8px; border-radius: 10px;">CONDITIONAL</span>
+                                </div>
+
+                                <!-- Price & Margin -->
+                                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                                    <div style="font-size: 24px; font-weight: 700; color: #22c55e;">$580</div>
                                     <div style="text-align: right;">
-                                        <div style="font-size: 11px; color: #22c55e;">+5.5% YoY ▲</div>
-                                        <div style="font-size: 9px; color: #64748b;">B/E: $450</div>
+                                        <div style="font-size: 11px; color: #22c55e; font-weight: 600;">+5.5%</div>
                                     </div>
                                 </div>
-                                <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <div style="font-size: 9px; color: #22c55e; font-weight: 600;">BULLISH → Growers have margin</div>
-                                    <div style="font-size: 9px; color: #94a3b8; margin-top: 3px;">Push: KOMPLETE, ENVY | 15 customers | $287K pipeline</div>
+
+                                <!-- Margin Bar -->
+                                <div style="margin-bottom: 10px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 9px; margin-bottom: 3px;">
+                                        <span style="color: #94a3b8;">Margin</span>
+                                        <span style="color: #22c55e; font-weight: 600;">$95/bale</span>
+                                    </div>
+                                    <div style="height: 4px; background: #334155; border-radius: 2px; overflow: hidden;">
+                                        <div style="width: 70%; height: 100%; background: linear-gradient(90deg, #22c55e, #4ade80); border-radius: 2px;"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Key Factors -->
+                                <div style="padding: 8px; background: rgba(0,0,0,0.25); border-radius: 6px; margin-bottom: 10px;">
+                                    <div style="font-size: 8px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Margin Factors</div>
+                                    <div style="display: flex; flex-direction: column; gap: 3px; font-size: 9px;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">Water req</span>
+                                            <span style="color: #f59e0b;">6-7 ML/ha</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">Fert cost</span>
+                                            <span style="color: #ef4444;">+18% YoY</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">B/E price</span>
+                                            <span style="color: #22c55e;">$485/bale</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sales Action -->
+                                <div style="font-size: 9px; color: #94a3b8;">
+                                    <span style="color: #e2e8f0;">15</span> customers | <span style="color: #22c55e;">$287K</span>
                                 </div>
                             </div>
-                            <!-- Sugar -->
-                            <div style="padding: 12px; background: rgba(245, 158, 11, 0.08); border-radius: 8px; border-left: 3px solid #f59e0b;">
-                                <div style="display: flex; justify-content: space-between; align-items: start;">
-                                    <div>
-                                        <div style="font-size: 10px; color: #94a3b8;">SUGAR</div>
-                                        <div style="font-size: 22px; font-weight: 700; color: #f59e0b;">$420<span style="font-size: 11px; color: #64748b;">/tonne</span></div>
-                                    </div>
+
+                            <!-- SUGAR -->
+                            <div style="padding: 14px; background: linear-gradient(180deg, rgba(239, 68, 68, 0.12) 0%, rgba(239, 68, 68, 0.04) 100%); border-radius: 10px; border: 1px solid rgba(239, 68, 68, 0.25);">
+                                <!-- Signal Badge -->
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="font-size: 11px; font-weight: 600; color: #e2e8f0; letter-spacing: 0.5px;">SUGAR</span>
+                                    <span style="font-size: 9px; font-weight: 700; color: #ef4444; background: rgba(239, 68, 68, 0.2); padding: 2px 8px; border-radius: 10px;">DEFER</span>
+                                </div>
+
+                                <!-- Price & Margin -->
+                                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                                    <div style="font-size: 24px; font-weight: 700; color: #ef4444;">$420</div>
                                     <div style="text-align: right;">
-                                        <div style="font-size: 15px; color: #f59e0b;">-8% YoY ▼</div>
-                                        <div style="font-size: 9px; color: #64748b;">B/E: $380</div>
+                                        <div style="font-size: 11px; color: #ef4444; font-weight: 600;">-8%</div>
                                     </div>
                                 </div>
-                                <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <div style="font-size: 9px; color: #f59e0b; font-weight: 600;">NEUTRAL → Tight margins, cautious spend</div>
-                                    <div style="font-size: 9px; color: #94a3b8; margin-top: 3px;">Focus: Burdekin/Mackay | 8 customers | $124K pipeline</div>
+
+                                <!-- Margin Bar -->
+                                <div style="margin-bottom: 10px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 9px; margin-bottom: 3px;">
+                                        <span style="color: #94a3b8;">Margin</span>
+                                        <span style="color: #ef4444; font-weight: 600;">$10/t <span style="opacity: 0.7;">(-78%)</span></span>
+                                    </div>
+                                    <div style="height: 4px; background: #334155; border-radius: 2px; overflow: hidden;">
+                                        <div style="width: 12%; height: 100%; background: #ef4444; border-radius: 2px;"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Key Factors -->
+                                <div style="padding: 8px; background: rgba(239, 68, 68, 0.1); border-radius: 6px; margin-bottom: 10px;">
+                                    <div style="font-size: 8px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Margin Factors</div>
+                                    <div style="display: flex; flex-direction: column; gap: 3px; font-size: 9px;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">Energy</span>
+                                            <span style="color: #ef4444;">+95% (10yr)</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">Pump cost</span>
+                                            <span style="color: #ef4444;">$120/ML</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">B/E price</span>
+                                            <span style="color: #ef4444;">$410/t</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sales Action -->
+                                <div style="font-size: 9px; color: #94a3b8;">
+                                    <span style="color: #e2e8f0;">8</span> customers | <span style="color: #ef4444;">$124K risk</span>
                                 </div>
                             </div>
-                            <!-- Wheat -->
-                            <div style="padding: 12px; background: rgba(239, 68, 68, 0.08); border-radius: 8px; border-left: 3px solid #ef4444;">
-                                <div style="display: flex; justify-content: space-between; align-items: start;">
-                                    <div>
-                                        <div style="font-size: 10px; color: #94a3b8;">WHEAT</div>
-                                        <div style="font-size: 22px; font-weight: 700; color: #ef4444;">$340<span style="font-size: 11px; color: #64748b;">/tonne</span></div>
-                                    </div>
+
+                            <!-- WHEAT -->
+                            <div style="padding: 14px; background: linear-gradient(180deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%); border-radius: 10px; border: 1px solid rgba(239, 68, 68, 0.35);">
+                                <!-- Signal Badge -->
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="font-size: 11px; font-weight: 600; color: #e2e8f0; letter-spacing: 0.5px;">WHEAT</span>
+                                    <span style="font-size: 9px; font-weight: 700; color: #fff; background: #ef4444; padding: 2px 8px; border-radius: 10px;">DISTRESSED</span>
+                                </div>
+
+                                <!-- Price & Margin -->
+                                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                                    <div style="font-size: 24px; font-weight: 700; color: #ef4444;">$340</div>
                                     <div style="text-align: right;">
-                                        <div style="font-size: 11px; color: #ef4444;">-15% YoY ▼</div>
-                                        <div style="font-size: 9px; color: #64748b;">B/E: $320</div>
+                                        <div style="font-size: 11px; color: #ef4444; font-weight: 600;">-15%</div>
                                     </div>
                                 </div>
-                                <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <div style="font-size: 9px; color: #ef4444; font-weight: 600;">BEARISH → Cutting discretionary inputs</div>
-                                    <div style="font-size: 9px; color: #94a3b8; margin-top: 3px;">Risk: PHOZSTART volume | 22 customers | $198K at risk</div>
+
+                                <!-- Margin Bar (Negative) -->
+                                <div style="margin-bottom: 10px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 9px; margin-bottom: 3px;">
+                                        <span style="color: #94a3b8;">Margin</span>
+                                        <span style="color: #ef4444; font-weight: 700;">-$25/t</span>
+                                    </div>
+                                    <div style="height: 4px; background: repeating-linear-gradient(90deg, #ef4444, #ef4444 4px, #334155 4px, #334155 8px); border-radius: 2px;"></div>
+                                </div>
+
+                                <!-- Key Factors -->
+                                <div style="padding: 8px; background: rgba(239, 68, 68, 0.15); border-radius: 6px; margin-bottom: 10px;">
+                                    <div style="font-size: 8px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Margin Factors</div>
+                                    <div style="display: flex; flex-direction: column; gap: 3px; font-size: 9px;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">Urea impact</span>
+                                            <span style="color: #ef4444;">+$45/ha</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">Price vs B/E</span>
+                                            <span style="color: #ef4444;">-$25/t</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">B/E price</span>
+                                            <span style="color: #ef4444;">$365/t</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sales Action -->
+                                <div style="font-size: 9px; color: #94a3b8;">
+                                    <span style="color: #e2e8f0;">22</span> customers | <span style="color: #ef4444;">$198K risk</span>
                                 </div>
                             </div>
-                            <!-- Sorghum -->
-                            <div style="padding: 12px; background: rgba(34, 197, 94, 0.08); border-radius: 8px; border-left: 3px solid #22c55e;">
-                                <div style="display: flex; justify-content: space-between; align-items: start;">
-                                    <div>
-                                        <div style="font-size: 10px; color: #94a3b8;">SORGHUM</div>
-                                        <div style="font-size: 22px; font-weight: 700; color: #22c55e;">$385<span style="font-size: 11px; color: #64748b;">/tonne</span></div>
-                                    </div>
+
+                            <!-- SORGHUM -->
+                            <div style="padding: 14px; background: linear-gradient(180deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 100%); border-radius: 10px; border: 1px solid rgba(34, 197, 94, 0.25);">
+                                <!-- Signal Badge -->
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="font-size: 11px; font-weight: 600; color: #e2e8f0; letter-spacing: 0.5px;">SORGHUM</span>
+                                    <span style="font-size: 9px; font-weight: 700; color: #22c55e; background: rgba(34, 197, 94, 0.2); padding: 2px 8px; border-radius: 10px;">PUSH</span>
+                                </div>
+
+                                <!-- Price & Margin -->
+                                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+                                    <div style="font-size: 24px; font-weight: 700; color: #22c55e;">$385</div>
                                     <div style="text-align: right;">
-                                        <div style="font-size: 11px; color: #22c55e;">+8% YoY ▲</div>
-                                        <div style="font-size: 9px; color: #64748b;">B/E: $310</div>
+                                        <div style="font-size: 11px; color: #22c55e; font-weight: 600;">+8%</div>
                                     </div>
                                 </div>
-                                <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1);">
-                                    <div style="font-size: 9px; color: #22c55e; font-weight: 600;">BULLISH → Summer crop window open</div>
-                                    <div style="font-size: 9px; color: #94a3b8; margin-top: 3px;">Push: POPSTART NP | 12 customers | $156K pipeline</div>
+
+                                <!-- Margin Bar -->
+                                <div style="margin-bottom: 10px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 9px; margin-bottom: 3px;">
+                                        <span style="color: #94a3b8;">Margin</span>
+                                        <span style="color: #22c55e; font-weight: 600;">$50/t <span style="opacity: 0.7;">(+12%)</span></span>
+                                    </div>
+                                    <div style="height: 4px; background: #334155; border-radius: 2px; overflow: hidden;">
+                                        <div style="width: 65%; height: 100%; background: linear-gradient(90deg, #22c55e, #4ade80); border-radius: 2px;"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Key Factors -->
+                                <div style="padding: 8px; background: rgba(34, 197, 94, 0.1); border-radius: 6px; margin-bottom: 10px;">
+                                    <div style="font-size: 8px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px;">Margin Factors</div>
+                                    <div style="display: flex; flex-direction: column; gap: 3px; font-size: 9px;">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">Water mode</span>
+                                            <span style="color: #22c55e;">Rainfed</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">La Nina</span>
+                                            <span style="color: #22c55e;">Favorable</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span style="color: #94a3b8;">B/E price</span>
+                                            <span style="color: #22c55e;">$335/t</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sales Action -->
+                                <div style="font-size: 9px; color: #94a3b8;">
+                                    <span style="color: #e2e8f0;">12</span> customers | <span style="color: #22c55e;">$156K</span>
                                 </div>
                             </div>
                         </div>
-                        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid #334155; display: flex; justify-content: space-between; font-size: 9px; color: #64748b;">
-                            <span>Total Pipeline: <span style="color: #22c55e;">$567K</span></span>
-                            <span>At Risk: <span style="color: #ef4444;">$198K</span> (wheat segment)</span>
-                            <span>Input Cost (Urea): <span style="color: #f59e0b;">$650/t</span> +12% YoY</span>
+
+                        <!-- Compact Footer -->
+                        <div style="margin-top: 14px; padding: 10px 14px; background: rgba(0,0,0,0.2); border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; gap: 16px; font-size: 10px;">
+                                <span style="color: #64748b;">Pipeline: <span style="color: #22c55e; font-weight: 600;">$443K</span> healthy · <span style="color: #ef4444; font-weight: 600;">$322K</span> at risk</span>
+                            </div>
+                            <div style="display: flex; gap: 12px; font-size: 9px; color: #64748b;">
+                                <span>Water: <span style="color: #f59e0b;">SA 100%</span> · <span style="color: #ef4444;">S.Basin drought risk</span></span>
+                                <span style="color: #475569;">|</span>
+                                <span>Urea $885/t · MAP $920/t · Diesel $1.92/L</span>
+                            </div>
                         </div>
                     </div>
 
@@ -3316,466 +3469,774 @@
 
         <!-- TAB 3: Market Intel -->
         <div id="market" class="tab-content">
-            <!-- Commodity Prices -->
+            <!-- Commodity Prices Header with Input Cost Index -->
             <div class="section-header">
-                <div class="section-title">Commodity Prices (WF1: Daily 6am) <span class="tier-badge tier-market">MI</span></div>
-                <span class="badge badge-green">Updated 26 Dec 6:00am</span>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="section-title">Grower Margin Analysis <span class="tier-badge tier-market">MI</span></div>
+                    <div style="display: flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(239, 68, 68, 0.15); border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <span style="font-size: 10px; color: #ef4444; font-weight: 600;">Input Costs +16% YoY</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 9px; color: #64748b;">Urea $885 | MAP $920 | Diesel $1.92</span>
+                    <span class="badge badge-green">6am AEST</span>
+                </div>
             </div>
+
+            <!-- New Visual Commodity Grid -->
             <div class="commodity-grid" style="margin-bottom: 24px;">
-                <div class="commodity-card">
+
+                <!-- COTTON - CONDITIONAL -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(245, 158, 11, 0.25);">
                     <div class="commodity-header">
                         <div class="commodity-name">Cotton</div>
-                        <span class="commodity-badge bullish">Bullish</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.2); padding: 3px 10px; border-radius: 12px;">CONDITIONAL</span>
                     </div>
-                    <div class="commodity-price positive">$580</div>
-                    <div class="commodity-unit">per bale (Cotlook A Index)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$620</span>
-                                <span>$580</span>
-                                <span>$540</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar up" style="height: 45%;"></div>
-                                    <div class="spark-bar up" style="height: 55%;"></div>
-                                    <div class="spark-bar up" style="height: 62%;"></div>
-                                    <div class="spark-bar down" style="height: 55%;"></div>
-                                    <div class="spark-bar up" style="height: 70%;"></div>
-                                    <div class="spark-bar up" style="height: 80%;"></div>
-                                    <div class="spark-bar up" style="height: 90%;"></div>
-                                    <div class="spark-bar up" style="height: 100%;"></div>
-                                </div>
-                            </div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #22c55e;">$585</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">-10% YoY</div>
+                    </div>
+                    <div class="commodity-unit">per bale (Cotlook A)</div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #22c55e; font-weight: 600;">$100/bale</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 60%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $485 ↑</span>
+                            <span>Max $150</span>
+                        </div>
                     </div>
-                    <div class="commodity-change positive">
-                        <span class="yoy">+5.5% YoY</span>
-                        <span class="trend">30d ↑</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(245, 158, 11, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">💧</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Water</div>
+                            <div style="font-size: 9px; color: #f59e0b; font-weight: 600;">6-7 ML/ha</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌱</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Inputs</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">+18%</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📊</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Area</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">600K ha</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">
-                        Above $450 break-even → Push K foliar
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 45%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 55%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 62%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 55%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 70%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 80%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 90%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 100%; background: #22c55e; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
+
+                <!-- SUGAR - DEFER -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(239, 68, 68, 0.08) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(239, 68, 68, 0.25);">
                     <div class="commodity-header">
                         <div class="commodity-name">Sugar</div>
-                        <span class="commodity-badge neutral">Neutral</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #ef4444; background: rgba(239, 68, 68, 0.2); padding: 3px 10px; border-radius: 12px;">DEFER</span>
                     </div>
-                    <div class="commodity-price warning">$420</div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #ef4444;">$420</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">-8% YoY</div>
+                    </div>
                     <div class="commodity-unit">per tonne (QSL Pool)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$500</span>
-                                <span>$420</span>
-                                <span>$340</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar up" style="height: 95%;"></div>
-                                    <div class="spark-bar up" style="height: 88%;"></div>
-                                    <div class="spark-bar down" style="height: 75%;"></div>
-                                    <div class="spark-bar down" style="height: 62%;"></div>
-                                    <div class="spark-bar down" style="height: 55%;"></div>
-                                    <div class="spark-bar up" style="height: 60%;"></div>
-                                    <div class="spark-bar down" style="height: 52%;"></div>
-                                    <div class="spark-bar down" style="height: 48%;"></div>
-                                </div>
-                            </div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #ef4444; font-weight: 600;">$10/t (-78%)</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 8%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $410 ↑↑</span>
+                            <span>Max $80</span>
+                        </div>
                     </div>
-                    <div class="commodity-change warning">
-                        <span class="yoy">-8% YoY</span>
-                        <span class="trend">30d ↓</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.15); border-radius: 6px;">
+                            <div style="font-size: 12px;">⚡</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Energy</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">+95%</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.15); border-radius: 6px;">
+                            <div style="font-size: 12px;">💧</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Pump</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">$120/ML</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.15); border-radius: 6px;">
+                            <div style="font-size: 12px;">📉</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Prod</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">10yr Low</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
-                        Monitor cane region activity
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 95%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 88%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 75%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 62%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 55%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 60%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 52%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 48%; background: #ef4444; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
+
+                <!-- WHEAT - DISTRESSED -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(239, 68, 68, 0.12) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(239, 68, 68, 0.35);">
                     <div class="commodity-header">
                         <div class="commodity-name">Wheat</div>
-                        <span class="commodity-badge bearish">Bearish</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #fff; background: #ef4444; padding: 3px 10px; border-radius: 12px;">DISTRESSED</span>
                     </div>
-                    <div class="commodity-price negative">$340</div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #ef4444;">$300</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">-15% YoY</div>
+                    </div>
                     <div class="commodity-unit">per tonne (CBOT)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$420</span>
-                                <span>$340</span>
-                                <span>$260</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar down" style="height: 100%;"></div>
-                                    <div class="spark-bar down" style="height: 92%;"></div>
-                                    <div class="spark-bar down" style="height: 80%;"></div>
-                                    <div class="spark-bar down" style="height: 65%;"></div>
-                                    <div class="spark-bar up" style="height: 70%;"></div>
-                                    <div class="spark-bar down" style="height: 58%;"></div>
-                                    <div class="spark-bar down" style="height: 48%;"></div>
-                                    <div class="spark-bar down" style="height: 42%;"></div>
-                                </div>
-                            </div>
+
+                    <!-- Margin Gauge - NEGATIVE -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(239, 68, 68, 0.15); border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #ef4444; font-weight: 700;">-$25/t NEGATIVE</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: repeating-linear-gradient(90deg, #ef4444, #ef4444 4px, #334155 4px, #334155 8px); border-radius: 4px;"></div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #ef4444; margin-top: 4px;">
+                            <span>B/E $365 ↑↑ (was $320)</span>
+                            <span>BELOW B/E</span>
+                        </div>
                     </div>
-                    <div class="commodity-change negative">
-                        <span class="yoy">-15% YoY</span>
-                        <span class="trend">30d ↓↓</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.15); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌱</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Urea</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">+$45/ha</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.15); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌍</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Supply</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">+10Mt</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.15); border-radius: 6px;">
+                            <div style="font-size: 12px;">📉</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Shorts</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">Record</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">
-                        Growers cutting discretionary inputs
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 100%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 92%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 80%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 65%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 70%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 58%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 48%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 42%; background: #ef4444; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
-                    <div class="commodity-header">
-                        <div class="commodity-name">Urea</div>
-                        <span class="commodity-badge neutral">Input</span>
-                    </div>
-                    <div class="commodity-price">$650</div>
-                    <div class="commodity-unit">per tonne (FOB Middle East)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$700</span>
-                                <span>$650</span>
-                                <span>$600</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar up" style="height: 42%;"></div>
-                                    <div class="spark-bar up" style="height: 55%;"></div>
-                                    <div class="spark-bar up" style="height: 68%;"></div>
-                                    <div class="spark-bar up" style="height: 80%;"></div>
-                                    <div class="spark-bar up" style="height: 90%;"></div>
-                                    <div class="spark-bar down" style="height: 85%;"></div>
-                                    <div class="spark-bar up" style="height: 95%;"></div>
-                                    <div class="spark-bar up" style="height: 100%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
-                    </div>
-                    <div class="commodity-change positive">
-                        <span class="yoy">+12% YoY</span>
-                        <span class="trend">30d ↑</span>
-                    </div>
-                    <div class="commodity-status" style="background: rgba(148, 163, 184, 0.15); color: #94a3b8;">
-                        Input cost rising → Margin pressure
-                    </div>
-                </div>
-                <div class="commodity-card">
+
+                <!-- SORGHUM - PUSH -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(34, 197, 94, 0.08) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(34, 197, 94, 0.25);">
                     <div class="commodity-header">
                         <div class="commodity-name">Sorghum</div>
-                        <span class="commodity-badge bullish">Bullish</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #22c55e; background: rgba(34, 197, 94, 0.2); padding: 3px 10px; border-radius: 12px;">PUSH</span>
                     </div>
-                    <div class="commodity-price positive">$385</div>
-                    <div class="commodity-unit">per tonne (delivered QLD)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$420</span>
-                                <span>$385</span>
-                                <span>$350</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar up" style="height: 55%;"></div>
-                                    <div class="spark-bar up" style="height: 62%;"></div>
-                                    <div class="spark-bar up" style="height: 70%;"></div>
-                                    <div class="spark-bar up" style="height: 78%;"></div>
-                                    <div class="spark-bar up" style="height: 85%;"></div>
-                                    <div class="spark-bar up" style="height: 90%;"></div>
-                                    <div class="spark-bar up" style="height: 95%;"></div>
-                                    <div class="spark-bar up" style="height: 100%;"></div>
-                                </div>
-                            </div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #22c55e;">$315</div>
+                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">+8% YoY</div>
+                    </div>
+                    <div class="commodity-unit">per tonne (Downs delivered)</div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #22c55e; font-weight: 600;">$35/t (+12%)</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 58%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $280</span>
+                            <span>Max $60</span>
+                        </div>
                     </div>
-                    <div class="commodity-change positive">
-                        <span class="yoy">+8% YoY</span>
-                        <span class="trend">30d ↑</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌧️</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Water</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Rainfed</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌀</div>
+                            <div style="font-size: 8px; color: #94a3b8;">La Nina</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">+ve</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📊</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Area</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">+11%</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">
-                        Summer crop window open
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 55%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 62%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 70%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 78%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 85%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 90%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 95%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 100%; background: #22c55e; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
+                <!-- CANOLA - MODERATE -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(245, 158, 11, 0.06) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(245, 158, 11, 0.2);">
                     <div class="commodity-header">
                         <div class="commodity-name">Canola</div>
-                        <span class="commodity-badge neutral">Neutral</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.2); padding: 3px 10px; border-radius: 12px;">MODERATE</span>
                     </div>
-                    <div class="commodity-price warning">$720</div>
-                    <div class="commodity-unit">per tonne (delivered)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$820</span>
-                                <span>$720</span>
-                                <span>$620</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar up" style="height: 95%;"></div>
-                                    <div class="spark-bar down" style="height: 88%;"></div>
-                                    <div class="spark-bar down" style="height: 80%;"></div>
-                                    <div class="spark-bar down" style="height: 72%;"></div>
-                                    <div class="spark-bar up" style="height: 78%;"></div>
-                                    <div class="spark-bar down" style="height: 68%;"></div>
-                                    <div class="spark-bar down" style="height: 62%;"></div>
-                                    <div class="spark-bar down" style="height: 55%;"></div>
-                                </div>
-                            </div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #f59e0b;">$770</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">-12% YoY</div>
+                    </div>
+                    <div class="commodity-unit">per tonne (non-GM delivered)</div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #22c55e; font-weight: 600;">$120/t</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 65%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $650</span>
+                            <span>Max $180</span>
+                        </div>
                     </div>
-                    <div class="commodity-change warning">
-                        <span class="yoy">-12% YoY</span>
-                        <span class="trend">30d ↓</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">⛽</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Biofuel</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Demand</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📊</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Prod</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">+13%</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(245, 158, 11, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🇨🇳</div>
+                            <div style="font-size: 8px; color: #94a3b8;">China</div>
+                            <div style="font-size: 9px; color: #f59e0b; font-weight: 600;">CA tariff</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
-                        Harvest pressure → Watch for bounce
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 95%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 88%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 80%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 72%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 78%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 68%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 62%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 55%; background: #ef4444; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
+
+                <!-- BARLEY - CAUTIOUS -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(245, 158, 11, 0.06) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(245, 158, 11, 0.2);">
                     <div class="commodity-header">
                         <div class="commodity-name">Barley</div>
-                        <span class="commodity-badge bearish">Bearish</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.2); padding: 3px 10px; border-radius: 12px;">CAUTIOUS</span>
                     </div>
-                    <div class="commodity-price negative">$295</div>
-                    <div class="commodity-unit">per tonne (delivered)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$380</span>
-                                <span>$295</span>
-                                <span>$210</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar down" style="height: 100%;"></div>
-                                    <div class="spark-bar down" style="height: 90%;"></div>
-                                    <div class="spark-bar down" style="height: 78%;"></div>
-                                    <div class="spark-bar down" style="height: 65%;"></div>
-                                    <div class="spark-bar down" style="height: 58%;"></div>
-                                    <div class="spark-bar down" style="height: 50%;"></div>
-                                    <div class="spark-bar down" style="height: 45%;"></div>
-                                    <div class="spark-bar down" style="height: 40%;"></div>
-                                </div>
-                            </div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #f59e0b;">$300</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">-15% YoY</div>
+                    </div>
+                    <div class="commodity-unit">per tonne (feed delivered)</div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #f59e0b; font-weight: 600;">$20/t (tight)</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 28%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $280</span>
+                            <span>Max $70</span>
+                        </div>
                     </div>
-                    <div class="commodity-change negative">
-                        <span class="yoy">-22% YoY</span>
-                        <span class="trend">30d ↓↓</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🇨🇳</div>
+                            <div style="font-size: 8px; color: #94a3b8;">China</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Restored</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(245, 158, 11, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📈</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Margin</div>
+                            <div style="font-size: 9px; color: #f59e0b; font-weight: 600;">33%</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📦</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Supply</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">Over</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">
-                        Oversupply → Growers under pressure
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 100%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 90%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 78%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 65%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 58%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 50%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 45%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 40%; background: #ef4444; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
+
+                <!-- CHICKPEAS - OPPORTUNITY -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(34, 197, 94, 0.08) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(34, 197, 94, 0.25);">
                     <div class="commodity-header">
                         <div class="commodity-name">Chickpeas</div>
-                        <span class="commodity-badge bullish">Bullish</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #22c55e; background: rgba(34, 197, 94, 0.2); padding: 3px 10px; border-radius: 12px;">OPPORTUNITY</span>
                     </div>
-                    <div class="commodity-price positive">$850</div>
-                    <div class="commodity-unit">per tonne (delivered)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$920</span>
-                                <span>$850</span>
-                                <span>$780</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar up" style="height: 50%;"></div>
-                                    <div class="spark-bar up" style="height: 60%;"></div>
-                                    <div class="spark-bar up" style="height: 70%;"></div>
-                                    <div class="spark-bar up" style="height: 78%;"></div>
-                                    <div class="spark-bar up" style="height: 85%;"></div>
-                                    <div class="spark-bar up" style="height: 92%;"></div>
-                                    <div class="spark-bar up" style="height: 97%;"></div>
-                                    <div class="spark-bar up" style="height: 100%;"></div>
-                                </div>
-                            </div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #22c55e;">$750</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">-45% YoY</div>
+                    </div>
+                    <div class="commodity-unit">per tonne (desi delivered)</div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #22c55e; font-weight: 600;">$250/t (strong)</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 75%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $500</span>
+                            <span>Max $350</span>
+                        </div>
                     </div>
-                    <div class="commodity-change positive">
-                        <span class="yoy">+18% YoY</span>
-                        <span class="trend">30d ↑↑</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🇮🇳</div>
+                            <div style="font-size: 8px; color: #94a3b8;">India</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">-2Mt gap</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌙</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Ramadan</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Feb-Mar</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📊</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Harvest</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">2.3Mt rec</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">
-                        Strong export demand
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 50%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 60%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 70%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 78%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 85%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 92%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 97%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 100%; background: #22c55e; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
+
+                <!-- MUNGBEANS - PUSH -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(34, 197, 94, 0.08) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(34, 197, 94, 0.25);">
                     <div class="commodity-header">
                         <div class="commodity-name">Mungbeans</div>
-                        <span class="commodity-badge bullish">Bullish</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #22c55e; background: rgba(34, 197, 94, 0.2); padding: 3px 10px; border-radius: 12px;">PUSH</span>
                     </div>
-                    <div class="commodity-price positive">$920</div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #22c55e;">$920</div>
+                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">+14% YoY</div>
+                    </div>
                     <div class="commodity-unit">per tonne (delivered QLD)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$980</span>
-                                <span>$920</span>
-                                <span>$860</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar up" style="height: 52%;"></div>
-                                    <div class="spark-bar up" style="height: 62%;"></div>
-                                    <div class="spark-bar up" style="height: 70%;"></div>
-                                    <div class="spark-bar up" style="height: 78%;"></div>
-                                    <div class="spark-bar up" style="height: 85%;"></div>
-                                    <div class="spark-bar up" style="height: 92%;"></div>
-                                    <div class="spark-bar up" style="height: 96%;"></div>
-                                    <div class="spark-bar up" style="height: 100%;"></div>
-                                </div>
-                            </div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #22c55e; font-weight: 600;">$320/t (strong)</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 80%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $600</span>
+                            <span>Max $400</span>
+                        </div>
                     </div>
-                    <div class="commodity-change positive">
-                        <span class="yoy">+14% YoY</span>
-                        <span class="trend">30d ↑</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌧️</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Water</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Summer</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌏</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Export</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Strong</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📅</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Season</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Planting</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">
-                        Summer planting window
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 52%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 62%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 70%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 78%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 85%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 92%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 96%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 100%; background: #22c55e; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
-                    <div class="commodity-header">
-                        <div class="commodity-name">Wool (EMI)</div>
-                        <span class="commodity-badge neutral">Neutral</span>
-                    </div>
-                    <div class="commodity-price warning">$1,180</div>
-                    <div class="commodity-unit">cents/kg clean</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>1.3K</span>
-                                <span>1.2K</span>
-                                <span>1.1K</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar down" style="height: 92%;"></div>
-                                    <div class="spark-bar down" style="height: 85%;"></div>
-                                    <div class="spark-bar up" style="height: 90%;"></div>
-                                    <div class="spark-bar down" style="height: 80%;"></div>
-                                    <div class="spark-bar down" style="height: 72%;"></div>
-                                    <div class="spark-bar up" style="height: 78%;"></div>
-                                    <div class="spark-bar down" style="height: 68%;"></div>
-                                    <div class="spark-bar down" style="height: 62%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
-                    </div>
-                    <div class="commodity-change warning">
-                        <span class="yoy">-15% YoY</span>
-                        <span class="trend">30d ↓</span>
-                    </div>
-                    <div class="commodity-status" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b;">
-                        China demand weak → Monitor
-                    </div>
-                </div>
-                <div class="commodity-card">
+
+                <!-- WOOL REMOVED - Not relevant for AgroBest customers -->
+
+                <!-- ALMONDS - PUSH -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(34, 197, 94, 0.08) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(34, 197, 94, 0.25);">
                     <div class="commodity-header">
                         <div class="commodity-name">Almonds</div>
-                        <span class="commodity-badge bullish">Bullish</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #22c55e; background: rgba(34, 197, 94, 0.2); padding: 3px 10px; border-radius: 12px;">PUSH</span>
                     </div>
-                    <div class="commodity-price positive">$8.50</div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #22c55e;">$8.50</div>
+                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">+15% YoY</div>
+                    </div>
                     <div class="commodity-unit">per kg (kernel basis)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$9.5</span>
-                                <span>$8.5</span>
-                                <span>$7.5</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar up" style="height: 55%;"></div>
-                                    <div class="spark-bar up" style="height: 65%;"></div>
-                                    <div class="spark-bar up" style="height: 75%;"></div>
-                                    <div class="spark-bar down" style="height: 68%;"></div>
-                                    <div class="spark-bar up" style="height: 80%;"></div>
-                                    <div class="spark-bar up" style="height: 88%;"></div>
-                                    <div class="spark-bar up" style="height: 95%;"></div>
-                                    <div class="spark-bar up" style="height: 100%;"></div>
-                                </div>
-                            </div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #22c55e; font-weight: 600;">$2.50/kg (strong)</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 70%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $6.00</span>
+                            <span>Max $3.50</span>
+                        </div>
                     </div>
-                    <div class="commodity-change positive">
-                        <span class="yoy">+15% YoY</span>
-                        <span class="trend">30d ↑</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">💧</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Water</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Riverland</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📈</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Price</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Recovery</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🌏</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Export</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">Growing</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(34, 197, 94, 0.15); color: #22c55e;">
-                        Price recovery → Riverland opportunity
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 55%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 65%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 75%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 68%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 80%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 88%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 95%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 100%; background: #22c55e; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
-                <div class="commodity-card">
+                <!-- WINE GRAPES - DEFER -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(239, 68, 68, 0.06) 0%, rgba(30, 41, 59, 1) 100%); border: 1px solid rgba(239, 68, 68, 0.2);">
                     <div class="commodity-header">
                         <div class="commodity-name">Wine Grapes</div>
-                        <span class="commodity-badge bearish">Bearish</span>
+                        <span style="font-size: 9px; font-weight: 700; color: #ef4444; background: rgba(239, 68, 68, 0.2); padding: 3px 10px; border-radius: 12px;">DEFER</span>
                     </div>
-                    <div class="commodity-price negative">$380</div>
-                    <div class="commodity-unit">per tonne (Shiraz)</div>
-                    <div class="sparkline-wrapper">
-                        <div class="sparkline-label"><span>8-Week Trend</span><span>Today</span></div>
-                        <div class="sparkline-container">
-                            <div class="sparkline-yaxis">
-                                <span>$500</span>
-                                <span>$380</span>
-                                <span>$260</span>
-                            </div>
-                            <div class="sparkline-chart-area">
-                                <div class="sparkline">
-                                    <div class="spark-bar down" style="height: 100%;"></div>
-                                    <div class="spark-bar down" style="height: 92%;"></div>
-                                    <div class="spark-bar down" style="height: 85%;"></div>
-                                    <div class="spark-bar down" style="height: 75%;"></div>
-                                    <div class="spark-bar down" style="height: 65%;"></div>
-                                    <div class="spark-bar down" style="height: 55%;"></div>
-                                    <div class="spark-bar down" style="height: 48%;"></div>
-                                    <div class="spark-bar down" style="height: 42%;"></div>
-                                </div>
-                            </div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #ef4444;">$380</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">-20% YoY</div>
+                    </div>
+                    <div class="commodity-unit">per tonne (Shiraz delivered)</div>
+
+                    <!-- Margin Gauge -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Margin Health</span>
+                            <span style="font-size: 11px; color: #ef4444; font-weight: 600;">-$20/t (negative)</span>
                         </div>
-                        <div class="sparkline-axis"><span>Nov</span><span>Dec</span></div>
+                        <div style="height: 8px; background: linear-gradient(90deg, #ef4444 0%, #ef4444 20%, #f59e0b 20%, #f59e0b 50%, #22c55e 50%, #22c55e 100%); border-radius: 4px; position: relative;">
+                            <div style="position: absolute; left: 8%; top: -2px; width: 4px; height: 12px; background: #fff; border-radius: 2px;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>B/E $400 ↑</span>
+                            <span>Max $200</span>
+                        </div>
                     </div>
-                    <div class="commodity-change negative">
-                        <span class="yoy">-35% YoY</span>
-                        <span class="trend">30d ↓↓</span>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">📦</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Supply</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">Oversupply</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">🇨🇳</div>
+                            <div style="font-size: 8px; color: #94a3b8;">China</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">Tariffs</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <div style="font-size: 12px;">⚠️</div>
+                            <div style="font-size: 8px; color: #94a3b8;">Credit</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">Risk High</div>
+                        </div>
                     </div>
-                    <div class="commodity-status" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">
-                        Oversupply crisis → Credit risk high
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 100%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 92%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 85%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 75%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 65%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 55%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 48%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 42%; background: #ef4444; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
+                    </div>
+                </div>
+
+                <!-- UREA - COST DRIVER -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(239, 68, 68, 0.12) 0%, rgba(30, 41, 59, 1) 100%); border: 2px solid rgba(239, 68, 68, 0.4); box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);">
+                    <div class="commodity-header">
+                        <div class="commodity-name" style="color: #ef4444;">Urea (N)</div>
+                        <span style="font-size: 9px; font-weight: 700; color: #fff; background: #ef4444; padding: 3px 10px; border-radius: 12px;">COST DRIVER</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #ef4444;">$885</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">+18% YoY</div>
+                    </div>
+                    <div class="commodity-unit">per tonne (AU delivered)</div>
+
+                    <!-- Cost Impact Box -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Cost Pressure</span>
+                            <span style="font-size: 11px; color: #ef4444; font-weight: 600;">HIGH</span>
+                        </div>
+                        <div style="height: 8px; background: #334155; border-radius: 4px; overflow: hidden;">
+                            <div style="width: 85%; height: 100%; background: linear-gradient(90deg, #f59e0b, #ef4444);"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>AUD -8% vs USD</span>
+                            <span>3.8Mt imports</span>
+                        </div>
+                    </div>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" style="margin-bottom: 2px;">
+                                <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                            <div style="font-size: 8px; color: #94a3b8;">FX</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">AUD -8%</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(245, 158, 11, 0.1); border-radius: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" style="margin-bottom: 2px;">
+                                <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                            </svg>
+                            <div style="font-size: 8px; color: #94a3b8;">Import</div>
+                            <div style="font-size: 9px; color: #f59e0b; font-weight: 600;">3.8Mt</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" style="margin-bottom: 2px;">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+                            </svg>
+                            <div style="font-size: 8px; color: #94a3b8;">Outlook</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">Elevated</div>
+                        </div>
+                    </div>
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 42%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 55%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 68%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 80%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 90%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 85%; background: #ef4444; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 95%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 100%; background: #22c55e; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
+                    </div>
+                </div>
+
+                <!-- MAP - SUPPLY WATCH -->
+                <div class="commodity-card" style="background: linear-gradient(180deg, rgba(245, 158, 11, 0.10) 0%, rgba(30, 41, 59, 1) 100%); border: 2px solid rgba(245, 158, 11, 0.35); box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);">
+                    <div class="commodity-header">
+                        <div class="commodity-name" style="color: #f59e0b;">MAP (P)</div>
+                        <span style="font-size: 9px; font-weight: 700; color: #0f172a; background: #f59e0b; padding: 3px 10px; border-radius: 12px;">SUPPLY WATCH</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                        <div class="commodity-price" style="color: #f59e0b;">$920</div>
+                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">+10% YoY</div>
+                    </div>
+                    <div class="commodity-unit">per tonne (AU delivered)</div>
+
+                    <!-- Supply Risk Box -->
+                    <div style="margin: 12px 0; padding: 10px; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <span style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Supply Security</span>
+                            <span style="font-size: 11px; color: #f59e0b; font-weight: 600;">AT RISK</span>
+                        </div>
+                        <div style="height: 8px; background: #334155; border-radius: 4px; overflow: hidden;">
+                            <div style="width: 65%; height: 100%; background: linear-gradient(90deg, #22c55e, #f59e0b);"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 8px; color: #64748b; margin-top: 4px;">
+                            <span>China exports closed</span>
+                            <span>1Mt imports YTD</span>
+                        </div>
+                    </div>
+
+                    <!-- Factor Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px;">
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" style="margin-bottom: 2px;">
+                                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            <div style="font-size: 8px; color: #94a3b8;">China</div>
+                            <div style="font-size: 9px; color: #ef4444; font-weight: 600;">Closed</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(245, 158, 11, 0.1); border-radius: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" style="margin-bottom: 2px;">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                            <div style="font-size: 8px; color: #94a3b8;">P.Hill</div>
+                            <div style="font-size: 9px; color: #f59e0b; font-weight: 600;">Closing</div>
+                        </div>
+                        <div style="text-align: center; padding: 6px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" style="margin-bottom: 2px;">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <div style="font-size: 8px; color: #94a3b8;">Morocco</div>
+                            <div style="font-size: 9px; color: #22c55e; font-weight: 600;">621K t</div>
+                        </div>
+                    </div>
+
+                    <!-- Mini Sparkline -->
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                        <div style="display: flex; gap: 2px; align-items: end; height: 20px;">
+                            <div style="width: 3px; height: 60%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 65%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 72%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 78%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 85%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 90%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 95%; background: #22c55e; border-radius: 1px;"></div>
+                            <div style="width: 3px; height: 100%; background: #22c55e; border-radius: 1px;"></div>
+                        </div>
+                        <span style="font-size: 9px; color: #64748b;">8-Week</span>
                     </div>
                 </div>
             </div>
@@ -3787,42 +4248,167 @@
                     <span class="badge badge-blue">Real-time Triggers</span>
                 </div>
                 <div class="grid grid-2" style="margin-top: 16px; gap: 16px;">
-                    <div style="padding: 16px; background: rgba(34, 197, 94, 0.1); border-radius: 12px; border-left: 4px solid #22c55e;">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                            <span style="font-size: 20px;">&#x1F4C8;</span>
-                            <div style="font-size: 14px; font-weight: 600; color: #22c55e;">BULLISH SIGNAL</div>
+
+                    <!-- PUSH SIGNAL - Sorghum -->
+                    <div style="padding: 20px; background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 100%); border-radius: 12px; border: 1px solid rgba(34, 197, 94, 0.3);">
+                        <div style="display: flex; align-items: flex-start; gap: 14px;">
+                            <div style="width: 44px; height: 44px; background: rgba(34, 197, 94, 0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="font-size: 11px; font-weight: 700; color: #22c55e; background: rgba(34, 197, 94, 0.2); padding: 3px 10px; border-radius: 12px;">PUSH SIGNAL</span>
+                                    <span style="font-size: 10px; color: #64748b;">Sorghum</span>
+                                </div>
+                                <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">$315/t (+8% YoY) | Margin $35/t</div>
+                                <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">
+                                    Best positioned summer crop. Rainfed (no water cost), La Nina favorable conditions, planted area up 11% to 200K ha. Production forecast 2.6Mt vs 1.8Mt 10yr avg.
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">B/E Price</div>
+                                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">$280/t</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">Margin %</div>
+                                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">+12.5%</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">Area</div>
+                                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">+36% 10yr</div>
+                                    </div>
+                                </div>
+                                <div style="padding: 10px 12px; background: rgba(34, 197, 94, 0.15); border-radius: 8px; border-left: 3px solid #22c55e;">
+                                    <div style="font-size: 10px; color: #64748b; margin-bottom: 4px;">SALES ACTION</div>
+                                    <div style="font-size: 12px; color: #22c55e; font-weight: 500;">Push PHOZSTART, summer starters, foliar micronutrients. QLD/NSW growers investing - capture early season orders.</div>
+                                </div>
+                            </div>
                         </div>
-                        <div style="font-size: 13px; font-weight: 500; margin-bottom: 6px;">Cotton > $550/bale threshold</div>
-                        <div style="font-size: 12px; color: #94a3b8;">Growers profitable → investing in inputs</div>
-                        <div style="font-size: 11px; color: #22c55e; margin-top: 8px;">ACTION: Push EC KOMPLETE, K foliar products</div>
                     </div>
-                    <div style="padding: 16px; background: rgba(34, 197, 94, 0.1); border-radius: 12px; border-left: 4px solid #22c55e;">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                            <span style="font-size: 20px;">&#x1F331;</span>
-                            <div style="font-size: 14px; font-weight: 600; color: #22c55e;">SEASONAL SIGNAL</div>
+
+                    <!-- OPPORTUNITY SIGNAL - Chickpeas -->
+                    <div style="padding: 20px; background: linear-gradient(135deg, rgba(34, 197, 94, 0.12) 0%, rgba(34, 197, 94, 0.04) 100%); border-radius: 12px; border: 1px solid rgba(34, 197, 94, 0.3);">
+                        <div style="display: flex; align-items: flex-start; gap: 14px;">
+                            <div style="width: 44px; height: 44px; background: rgba(34, 197, 94, 0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                    <polyline points="17 6 23 6 23 12"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="font-size: 11px; font-weight: 700; color: #22c55e; background: rgba(34, 197, 94, 0.2); padding: 3px 10px; border-radius: 12px;">OPPORTUNITY</span>
+                                    <span style="font-size: 10px; color: #64748b;">Chickpeas</span>
+                                </div>
+                                <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">$750/t (-45% YoY) | Margin $250/t</div>
+                                <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">
+                                    Price down but margins strong. India deficit 2-3Mt driving demand, Ramadan Feb-Mar peak. Record AU harvest 2.3Mt, 1.63Mt shipped Oct-Jan. Don't confuse price drop with weak demand.
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">B/E Price</div>
+                                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">$500/t</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">Margin %</div>
+                                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">+50%</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">India Gap</div>
+                                        <div style="font-size: 12px; color: #22c55e; font-weight: 600;">2-3Mt</div>
+                                    </div>
+                                </div>
+                                <div style="padding: 10px 12px; background: rgba(34, 197, 94, 0.15); border-radius: 8px; border-left: 3px solid #22c55e;">
+                                    <div style="font-size: 10px; color: #64748b; margin-bottom: 4px;">SALES ACTION</div>
+                                    <div style="font-size: 12px; color: #22c55e; font-weight: 500;">Target pulse growers NOW. Strong margins despite price correction. Push P & Zn products for pulse nutrition. Reframe: "margins up, not prices down".</div>
+                                </div>
+                            </div>
                         </div>
-                        <div style="font-size: 13px; font-weight: 500; margin-bottom: 6px;">Sorghum planting window open</div>
-                        <div style="font-size: 12px; color: #94a3b8;">QLD/NSW summer crop season started</div>
-                        <div style="font-size: 11px; color: #22c55e; margin-top: 8px;">ACTION: PHOZSTART, starter fertilizers</div>
                     </div>
-                    <div style="padding: 16px; background: rgba(239, 68, 68, 0.1); border-radius: 12px; border-left: 4px solid #ef4444;">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                            <span style="font-size: 20px;">&#x26A0;</span>
-                            <div style="font-size: 14px; font-weight: 600; color: #ef4444;">BEARISH SIGNAL</div>
+
+                    <!-- DISTRESS SIGNAL - Wheat -->
+                    <div style="padding: 20px; background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(239, 68, 68, 0.04) 100%); border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <div style="display: flex; align-items: flex-start; gap: 14px;">
+                            <div style="width: 44px; height: 44px; background: rgba(239, 68, 68, 0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                    <line x1="12" y1="9" x2="12" y2="13"/>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="font-size: 11px; font-weight: 700; color: #ef4444; background: rgba(239, 68, 68, 0.2); padding: 3px 10px; border-radius: 12px;">DISTRESS SIGNAL</span>
+                                    <span style="font-size: 10px; color: #64748b;">Wheat</span>
+                                </div>
+                                <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">$300/t (-15% YoY) | Margin -$45/t</div>
+                                <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">
+                                    BELOW BREAKEVEN. Global oversupply (+10Mt ending stocks), urea +18% pushing B/E to $345/t. Growers losing $45/ha on every hectare. Expect payment deferrals and credit stress.
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">B/E Price</div>
+                                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">$345/t ↑</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">Margin %</div>
+                                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">-13%</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">Global Stock</div>
+                                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">+10Mt</div>
+                                    </div>
+                                </div>
+                                <div style="padding: 10px 12px; background: rgba(239, 68, 68, 0.15); border-radius: 8px; border-left: 3px solid #ef4444;">
+                                    <div style="font-size: 10px; color: #64748b; margin-bottom: 4px;">SALES ACTION</div>
+                                    <div style="font-size: 12px; color: #ef4444; font-weight: 500;">Focus on collections & AR. Reduce new credit exposure. Expect order deferrals. Flag high-risk accounts to finance team. Do NOT push volume.</div>
+                                </div>
+                            </div>
                         </div>
-                        <div style="font-size: 13px; font-weight: 500; margin-bottom: 6px;">Wheat/Barley below break-even</div>
-                        <div style="font-size: 12px; color: #94a3b8;">Grain growers cutting discretionary spend</div>
-                        <div style="font-size: 11px; color: #ef4444; margin-top: 8px;">ACTION: Focus collections, reduce credit risk</div>
                     </div>
-                    <div style="padding: 16px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; border-left: 4px solid #f59e0b;">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                            <span style="font-size: 20px;">&#x1F4B0;</span>
-                            <div style="font-size: 14px; font-weight: 600; color: #f59e0b;">COST SIGNAL</div>
+
+                    <!-- INPUT COST ALERT -->
+                    <div style="padding: 20px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.04) 100%); border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.3);">
+                        <div style="display: flex; align-items: flex-start; gap: 14px;">
+                            <div style="width: 44px; height: 44px; background: rgba(245, 158, 11, 0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                    <span style="font-size: 11px; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.2); padding: 3px 10px; border-radius: 12px;">INPUT COST ALERT</span>
+                                    <span style="font-size: 10px; color: #64748b;">Fertilizer</span>
+                                </div>
+                                <div style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Urea $885/t (+18%) | MAP $920/t (+10%)</div>
+                                <div style="font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 10px;">
+                                    AUD down 8% vs USD inflating import costs. China MAP exports closed Oct 15. Phosphate Hill (domestic MAP) closing Sep 2026. B/E prices rising across all crops: Wheat +$45/ha, Cotton +$60/ha.
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(245, 158, 11, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">AUD/USD</div>
+                                        <div style="font-size: 12px; color: #f59e0b; font-weight: 600;">0.62 (-8%)</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">Urea YoY</div>
+                                        <div style="font-size: 12px; color: #ef4444; font-weight: 600;">+18%</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 8px 4px; background: rgba(245, 158, 11, 0.1); border-radius: 6px;">
+                                        <div style="font-size: 9px; color: #64748b;">MAP YoY</div>
+                                        <div style="font-size: 12px; color: #f59e0b; font-weight: 600;">+10%</div>
+                                    </div>
+                                </div>
+                                <div style="padding: 10px 12px; background: rgba(245, 158, 11, 0.15); border-radius: 8px; border-left: 3px solid #f59e0b;">
+                                    <div style="font-size: 10px; color: #64748b; margin-bottom: 4px;">SALES ACTION</div>
+                                    <div style="font-size: 12px; color: #f59e0b; font-weight: 500;">Lead with ROI messaging over volume. Push efficiency products (NUTRI-P, controlled release). Reframe: "cost per unit yield" not "cost per tonne".</div>
+                                </div>
+                            </div>
                         </div>
-                        <div style="font-size: 13px; font-weight: 500; margin-bottom: 6px;">Urea +12% YoY rising</div>
-                        <div style="font-size: 12px; color: #94a3b8;">Input costs squeezing grower margins</div>
-                        <div style="font-size: 15px; color: #f59e0b; margin-top: 8px;">ACTION: Highlight efficiency products, ROI messaging</div>
                     </div>
+
                 </div>
             </div>
 
@@ -3847,57 +4433,66 @@
                     <tbody>
                         <tr style="background: rgba(255,255,255,0.03);">
                             <td style="padding: 14px 16px; font-weight: 600;">Cotton</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #22c55e; font-weight: 600;">$580</td>
-                            <td style="padding: 14px 16px; text-align: right;">$450</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #22c55e;">+29%</td>
-                            <td style="padding: 14px 16px; text-align: right;">$620</td>
-                            <td style="padding: 14px 16px; text-align: right;">$485</td>
-                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #22c55e; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">INVESTING</span></td>
+                            <td style="padding: 14px 16px; text-align: right; color: #f59e0b; font-weight: 600;">$585</td>
+                            <td style="padding: 14px 16px; text-align: right;">$485 ↑</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #22c55e;">+21%</td>
+                            <td style="padding: 14px 16px; text-align: right;">$650</td>
+                            <td style="padding: 14px 16px; text-align: right;">$520</td>
+                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #f59e0b; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">CONDITIONAL</span></td>
                         </tr>
                         <tr>
                             <td style="padding: 14px 16px; font-weight: 600;">Sugar</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #f59e0b; font-weight: 600;">$420</td>
-                            <td style="padding: 14px 16px; text-align: right;">$380</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #f59e0b;">+11%</td>
-                            <td style="padding: 14px 16px; text-align: right;">$510</td>
-                            <td style="padding: 14px 16px; text-align: right;">$395</td>
-                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #f59e0b; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">CAUTIOUS</span></td>
+                            <td style="padding: 14px 16px; text-align: right; color: #ef4444; font-weight: 600;">$420</td>
+                            <td style="padding: 14px 16px; text-align: right;">$410 ↑↑</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #ef4444;">+2%</td>
+                            <td style="padding: 14px 16px; text-align: right;">$490</td>
+                            <td style="padding: 14px 16px; text-align: right;">$400</td>
+                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #ef4444; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">DEFER</span></td>
                         </tr>
                         <tr style="background: rgba(255,255,255,0.03);">
                             <td style="padding: 14px 16px; font-weight: 600;">Wheat</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #ef4444; font-weight: 600;">$340</td>
-                            <td style="padding: 14px 16px; text-align: right;">$360</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #ef4444;">-6%</td>
-                            <td style="padding: 14px 16px; text-align: right;">$425</td>
-                            <td style="padding: 14px 16px; text-align: right;">$320</td>
-                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #ef4444; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">CUTTING</span></td>
+                            <td style="padding: 14px 16px; text-align: right; color: #ef4444; font-weight: 600;">$300</td>
+                            <td style="padding: 14px 16px; text-align: right;">$345 ↑</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #ef4444;">-13%</td>
+                            <td style="padding: 14px 16px; text-align: right;">$380</td>
+                            <td style="padding: 14px 16px; text-align: right;">$275</td>
+                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #ef4444; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">DISTRESSED</span></td>
                         </tr>
                         <tr>
                             <td style="padding: 14px 16px; font-weight: 600;">Sorghum</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #22c55e; font-weight: 600;">$385</td>
-                            <td style="padding: 14px 16px; text-align: right;">$320</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #22c55e;">+20%</td>
-                            <td style="padding: 14px 16px; text-align: right;">$410</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #22c55e; font-weight: 600;">$315</td>
+                            <td style="padding: 14px 16px; text-align: right;">$280</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #22c55e;">+13%</td>
                             <td style="padding: 14px 16px; text-align: right;">$340</td>
-                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #22c55e; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">INVESTING</span></td>
+                            <td style="padding: 14px 16px; text-align: right;">$290</td>
+                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #22c55e; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">PUSH</span></td>
                         </tr>
                         <tr style="background: rgba(255,255,255,0.03);">
                             <td style="padding: 14px 16px; font-weight: 600;">Canola</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #f59e0b; font-weight: 600;">$720</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #f59e0b; font-weight: 600;">$770</td>
                             <td style="padding: 14px 16px; text-align: right;">$650</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #f59e0b;">+11%</td>
-                            <td style="padding: 14px 16px; text-align: right;">$850</td>
-                            <td style="padding: 14px 16px; text-align: right;">$680</td>
-                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #f59e0b; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">WATCHING</span></td>
+                            <td style="padding: 14px 16px; text-align: right; color: #22c55e;">+18%</td>
+                            <td style="padding: 14px 16px; text-align: right;">$880</td>
+                            <td style="padding: 14px 16px; text-align: right;">$720</td>
+                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #f59e0b; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">MODERATE</span></td>
                         </tr>
                         <tr>
                             <td style="padding: 14px 16px; font-weight: 600;">Barley</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #ef4444; font-weight: 600;">$295</td>
-                            <td style="padding: 14px 16px; text-align: right;">$310</td>
-                            <td style="padding: 14px 16px; text-align: right; color: #ef4444;">-5%</td>
-                            <td style="padding: 14px 16px; text-align: right;">$380</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #f59e0b; font-weight: 600;">$300</td>
+                            <td style="padding: 14px 16px; text-align: right;">$280</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #f59e0b;">+7%</td>
+                            <td style="padding: 14px 16px; text-align: right;">$360</td>
                             <td style="padding: 14px 16px; text-align: right;">$275</td>
-                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #ef4444; color: white; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">CUTTING</span></td>
+                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #f59e0b; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">CAUTIOUS</span></td>
+                        </tr>
+                        <tr style="background: rgba(255,255,255,0.03);">
+                            <td style="padding: 14px 16px; font-weight: 600;">Chickpeas</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #22c55e; font-weight: 600;">$750</td>
+                            <td style="padding: 14px 16px; text-align: right;">$500</td>
+                            <td style="padding: 14px 16px; text-align: right; color: #22c55e;">+50%</td>
+                            <td style="padding: 14px 16px; text-align: right;">$1,400</td>
+                            <td style="padding: 14px 16px; text-align: right;">$690</td>
+                            <td style="padding: 14px 16px; text-align: center;"><span style="background: #22c55e; color: #0f172a; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">OPPORTUNITY</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -3910,17 +4505,17 @@
                     <span class="badge badge-amber">Margin Impact</span>
                 </div>
                 <div class="grid grid-4" style="margin-top: 16px; gap: 16px;">
-                    <div style="padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; text-align: center;">
-                        <div style="font-size: 11px; color: #94a3b8; margin-bottom: 8px;">UREA (N)</div>
-                        <div style="font-size: 24px; font-weight: 700;">$650</div>
-                        <div style="font-size: 11px; color: #ef4444; margin-top: 4px;">▲ +12% YoY</div>
-                        <div style="font-size: 10px; color: #64748b; margin-top: 8px;">FOB Middle East</div>
+                    <div style="padding: 16px; background: rgba(239, 68, 68, 0.1); border-radius: 12px; text-align: center; border: 1px solid rgba(239, 68, 68, 0.3);">
+                        <div style="font-size: 11px; color: #ef4444; margin-bottom: 8px; font-weight: 600;">UREA (N)</div>
+                        <div style="font-size: 24px; font-weight: 700; color: #ef4444;">$885</div>
+                        <div style="font-size: 11px; color: #ef4444; margin-top: 4px;">▲ +18% YoY</div>
+                        <div style="font-size: 10px; color: #64748b; margin-top: 8px;">AU delivered · 3.8Mt imports</div>
                     </div>
-                    <div style="padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; text-align: center;">
-                        <div style="font-size: 11px; color: #94a3b8; margin-bottom: 8px;">DAP (P)</div>
-                        <div style="font-size: 24px; font-weight: 700;">$720</div>
-                        <div style="font-size: 15px; color: #f59e0b; margin-top: 4px;">▲ +5% YoY</div>
-                        <div style="font-size: 10px; color: #64748b; margin-top: 8px;">FOB US Gulf</div>
+                    <div style="padding: 16px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; text-align: center; border: 1px solid rgba(245, 158, 11, 0.3);">
+                        <div style="font-size: 11px; color: #f59e0b; margin-bottom: 8px; font-weight: 600;">MAP (P)</div>
+                        <div style="font-size: 24px; font-weight: 700; color: #f59e0b;">$920</div>
+                        <div style="font-size: 11px; color: #ef4444; margin-top: 4px;">▲ +10% YoY</div>
+                        <div style="font-size: 10px; color: #64748b; margin-top: 8px;">AU delivered · China closed</div>
                     </div>
                     <div style="padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; text-align: center;">
                         <div style="font-size: 11px; color: #94a3b8; margin-bottom: 8px;">MOP (K)</div>
@@ -3928,11 +4523,11 @@
                         <div style="font-size: 11px; color: #22c55e; margin-top: 4px;">▼ -8% YoY</div>
                         <div style="font-size: 10px; color: #64748b; margin-top: 8px;">FOB Vancouver</div>
                     </div>
-                    <div style="padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; text-align: center;">
+                    <div style="padding: 16px; background: rgba(239, 68, 68, 0.08); border-radius: 12px; text-align: center;">
                         <div style="font-size: 11px; color: #94a3b8; margin-bottom: 8px;">AUD/USD</div>
                         <div style="font-size: 24px; font-weight: 700;">0.62</div>
-                        <div style="font-size: 11px; color: #ef4444; margin-top: 4px;">▼ -4% YoY</div>
-                        <div style="font-size: 10px; color: #64748b; margin-top: 8px;">Imports more expensive</div>
+                        <div style="font-size: 11px; color: #ef4444; margin-top: 4px;">▼ -8% YoY</div>
+                        <div style="font-size: 10px; color: #64748b; margin-top: 8px;">Import costs +8%</div>
                     </div>
                 </div>
             </div>
